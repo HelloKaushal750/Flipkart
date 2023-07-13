@@ -1,0 +1,17 @@
+#firstPanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 80px;
+}
+#firstPanel > div {
+  text-align: center;
+  /* font-style:unset; */
+  font-weight: 500;
+}
+#firstPanel > div > img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: -12px;
+}
