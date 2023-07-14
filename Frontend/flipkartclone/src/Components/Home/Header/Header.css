@@ -8,10 +8,11 @@
 #firstPanel > div {
   text-align: center;
   /* font-style:unset; */
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 400;
 }
 #firstPanel > div > img {
   width: 70px;
   height: 70px;
-  margin-bottom: -12px;
+  margin-bottom: 5px;
 }

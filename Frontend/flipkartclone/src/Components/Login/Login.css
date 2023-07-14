@@ -1,0 +1,113 @@
+.login_container {
+  background-color: white;
+  padding: 50px 35px 20px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.input-container {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+}
+
+input[type="email"] {
+  width: 100%;
+  padding: 6px;
+  border: none;
+  border-bottom: 1px solid #979797;
+  transition: border-color 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="email"]:hover {
+  border-bottom-color: #2874f0;
+}
+
+input[type="email"].has-content:focus + label,
+input[type="email"].has-content:hover + label {
+  top: -10px;
+  font-size: 12px;
+  color: #979797;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+
+input[type="email"]:focus {
+  outline: none;
+  border-bottom-color: #2874f0;
+  padding-left: 0px;
+}
+
+label {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #979797;
+  pointer-events: none;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+
+label.has-content {
+  top: -10px;
+  font-size: 12px;
+  color: #979797;
+}
+
+.input-container2 {
+  margin-top: 20px;
+  position: relative;
+  width: 100%; /* Adjust as needed */
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 6px;
+  border: none;
+  border-bottom: 1px solid #979797;
+  transition: border-color 0.3s;
+}
+
+input[type="password"]:focus,
+input[type="password"]:hover {
+  border-bottom-color: #2874f0;
+}
+
+input[type="password"].has-content2:focus + label,
+input[type="password"].has-content2:hover + label {
+  top: -10px;
+  font-size: 12px;
+  color: #979797;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+
+input[type="password"]:focus {
+  outline: none;
+  border-bottom-color: #2874f0;
+  padding-left: 0px;
+}
+
+label {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #979797;
+  pointer-events: none;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+
+label.has-content2 {
+  top: -10px;
+  font-size: 12px;
+  color: #979797;
+}
+.btn_continue {
+    width: 100%;
+    background-color: #fb641b;
+    color: white;
+    font-weight: 6 00;
+    padding: 12px;
+    cursor: pointer;
+  }
