@@ -2,8 +2,10 @@ import "./Signup.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "../Login/Login";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 
-function Signup() {
+function Signup({ onClose }) {
   const isLogin = useSelector((state) => {
     return state.showLogin;
   });
@@ -22,24 +24,70 @@ function Signup() {
           <img src="https://www.bingocycles.com/images/login_img.png" alt="" />
         </div>
       </div>
-      {!isLogin ? <Register /> : <Login />}
+      {!isLogin ? <Register /> : <Login onClose={onClose} />}
     </div>
   );
 }
 
 function Register() {
+  const toast = useToast();
   const [inputValue, setInputValue] = useState("");
   const [inputValue2, setInputValue2] = useState("");
   const [inputValue3, setInputValue3] = useState("");
-  const registerData = {
+  const [registerData, setRegisterData] = useState({
     email: "",
     password: "",
     confirmpassword: "",
-  };
+  });
   const dispatch = useDispatch();
 
   const handleSignUp = () => {
-    dispatch({ type: "LOGINPAGE", payload: true });
+    if (
+      !registerData.email ||
+      !registerData.password ||
+      !registerData.confirmpassword
+    ) {
+      toast({
+        title: "Kindly fill all inputs",
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+    } else if (registerData.password !== registerData.confirmpassword) {
+      toast({
+        title: "Password and Confirm Password must be match",
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
+    } else {
+      axios
+        .post("http://localhost:7000/signup", registerData)
+        .then((res) => {
+          if (res.data.message === "Registration Successful") {
+            toast({
+              title: `${res.data.message}`,
+              status: "success",
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: `${res.data.message}`,
+              status: "info",
+              isClosable: true,
+            });
+          }
+          dispatch({ type: "LOGINPAGE", payload: true });
+          setRegisterData({ email: "", password: "", confirmpassword: "" });
+        })
+        .catch((err) => {
+          toast({
+            title: `${err}`,
+            status: "error",
+            isClosable: true,
+          });
+        });
+    }
   };
   const handleLogin = () => {
     dispatch({ type: "LOGINPAGE", payload: true });
@@ -47,48 +95,51 @@ function Register() {
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+    setRegisterData({ ...registerData, email: event.target.value });
   };
   const handleInputChange2 = (event) => {
     setInputValue2(event.target.value);
+    setRegisterData({ ...registerData, password: event.target.value });
   };
   const handleInputChange3 = (event) => {
     setInputValue3(event.target.value);
+    setRegisterData({ ...registerData, confirmpassword: event.target.value });
   };
   return (
     <div className="right_signup">
-      <div class="input-container">
+      <div className="input-container">
         <input
-          value={inputValue}
+          value={registerData.email}
           onChange={handleInputChange}
           className={inputValue ? "has-content" : ""}
           type="email"
           id="myInput"
         />
-        <label for="myInput" className={inputValue ? "has-content" : ""}>
+        <label htmlFor="myInput" className={inputValue ? "has-content" : ""}>
           Enter Email
         </label>
       </div>
-      <div class="input-container2">
+      <div className="input-container2">
         <input
-          value={inputValue2}
+          value={registerData.password}
           onChange={handleInputChange2}
           className={inputValue2 ? "has-content2" : ""}
           type="password"
           id="myInput2"
         />
-        <label for="myInput2" className={inputValue2 ? "has-content2" : ""}>
+        <label htmlFor="myInput2" className={inputValue2 ? "has-content2" : ""}>
           Enter Password
         </label>
       </div>
-      <div class="input-container3">
+      <div className="input-container3">
         <input
-          value={inputValue3}
+          value={registerData.confirmpassword}
           onChange={handleInputChange3}
           className={inputValue3 ? "has-content3" : ""}
           type="password"
           id="myInput3"
         />
-        <label for="myInput3" className={inputValue3 ? "has-content3" : ""}>
+        <label htmlFor="myInput3" className={inputValue3 ? "has-content3" : ""}>
           Confirm Password
         </label>
       </div>

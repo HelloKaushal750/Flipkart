@@ -8,11 +8,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Signup from "../Signup/Signup";
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
+  const username = useSelector((state) => {
+    return state.loggedInUser;
+  });
   return (
     <div id="navbar">
       <div id="navImage">
@@ -65,28 +68,51 @@ function Navbar() {
           </button>
         </form>
         <div className="dropdown">
-          <button className="dropbtn">Login</button>
-          <div className="dropdown-content">
+          {!username ? (
+            <button className="dropbtn">Login</button>
+          ) : (
+            <p
+              style={{
+                fontWeight: "600",
+                fontSize: "15px",
+                color: "white",
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "5px",
+              }}
+            >
+              {username}{" "}
+              <i
+                style={{ fontSize: "10px" }}
+                className="fa-solid fa-chevron-down"
+              ></i>
+            </p>
+          )}
+          <div className="dropdown-content" style={{cursor:"pointer"}}>
             <div className="arrow-up"></div>
             <div className="contain">
-              <div className="firstDiv">
-                <p style={{ fontWeight: "600", fontSize: "15px" }}>
-                  New Customer?
-                </p>
-                <button
-                  onClick={() => {
-                    onOpen();
-                    dispatch({type:"LOGINPAGE",payload:false})
-                  }}
-                  style={{
-                    color: "#2874f0",
-                    textDecoration: "none",
-                    fontWeight: "400",
-                  }}
-                >
-                  Sign Up
-                </button>
-              </div>
+              {!username && (
+                <div className="firstDiv">
+                  <p style={{ fontWeight: "600", fontSize: "15px" }}>
+                    New Customer?
+                  </p>
+                  <button
+                    onClick={() => {
+                      onOpen();
+                      dispatch({ type: "LOGINPAGE", payload: false });
+                    }}
+                    style={{
+                      color: "#2874f0",
+                      textDecoration: "none",
+                      fontWeight: "400",
+                    }}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              )}
 
               <Modal
                 blockScrollOnMount={false}
@@ -98,7 +124,7 @@ function Navbar() {
                 <ModalOverlay />
                 <ModalContent>
                   <ModalCloseButton />
-                  <Signup />
+                  <Signup onClose={onClose} />
                 </ModalContent>
               </Modal>
 
@@ -126,6 +152,17 @@ function Navbar() {
                 <i className="fa-solid fa-rug"></i>
                 <p>Gift Cards</p>
               </div>
+              {username && (
+                <div
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    dispatch({type:"USERNAME",payload:""})
+                  }}
+                >
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  <p>Logout</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -133,11 +170,21 @@ function Navbar() {
       <div id="navCart">
         <button>Become a Seller</button>
         <div className="dropdown2">
-          <button className="dropbtn2">More</button>
-          <i
-            style={{ fontSize: "10px" }}
-            className="fa-solid fa-chevron-down"
-          ></i>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "0px",
+            }}
+          >
+            <button className="dropbtn2">More</button>
+            <i
+              style={{ fontSize: "10px" }}
+              className="fa-solid fa-chevron-down"
+            ></i>
+          </div>
+
           <div className="dropdown-content2">
             <div className="arrow-up2"></div>
             <div className="contain2">

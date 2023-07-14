@@ -4,9 +4,10 @@ import { navData } from "../../../constant/data";
 function Header() {
   return (
     <div id="firstPanel">
-      {navData.map((item) => {
+      {navData.map((item,i) => {
         return (
           <div
+          key={i}
             style={{
               display: "flex",
               flexDirection: "column",

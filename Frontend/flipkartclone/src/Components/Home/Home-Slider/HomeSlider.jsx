@@ -32,8 +32,8 @@ function HomeSlider() {
       autoPlaySpeed={4000}
       responsive={responsive}
     >
-      {bannerData.map((item) => {
-        return <img src={item.url} alt="" width={"100%"} height={"240px"} />;
+      {bannerData.map((item,i) => {
+        return <img key={i} src={item.url} alt="" width={"100%"} height={"240px"} />;
       })}
     </Carousel>
   );
