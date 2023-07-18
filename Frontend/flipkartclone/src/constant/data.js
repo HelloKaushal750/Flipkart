@@ -59,3 +59,16 @@ export const bannerData = [
     url: "https://rukminim1.flixcart.com/flap/3376/560/image/f6202f13b6f89b03.jpg?q=50",
   },
 ];
+
+
+export const midBanner = [
+  {
+    url:"https://rukminim1.flixcart.com/fk-p-flap/520/280/image/d9f629cced0a451d.jpg?q=20"
+  },
+  {
+    url:"https://rukminim1.flixcart.com/fk-p-flap/520/280/image/15340d3009e6bf94.png?q=20"
+  },
+  {
+    url:"https://rukminim1.flixcart.com/fk-p-flap/520/280/image/df072b1963b13fdf.jpeg?q=20"
+  }
+]
