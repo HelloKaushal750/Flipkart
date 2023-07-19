@@ -2,6 +2,7 @@ import Header from "./Header/Header";
 import HomeSlider from "./Home-Slider/HomeSlider";
 import Slider from "./Slider/Slider";
 import {Banner, Banner2} from "./Banner/Banner";
+import Footer from "./Footer/Footer";
 
 function Home() {
   return (
@@ -45,6 +46,7 @@ function Home() {
           title={"Deals for Summer"}
         />
       </div>
+      <Footer />
     </div>
   );
 }

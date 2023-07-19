@@ -1,43 +1,43 @@
 export const navData = [
   {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/50379f65f7b59622.png?q=100",
     text: "Top Offers",
   },
   {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/29327f40e9c4d26b.png?q=100",
-    text: "Grocery",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/0a0243119f02f7a5.png?q=100",
+    text: "Mobiles & Tablets",
   },
   {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/22fddf3c7da4c4f4.png?q=100",
-    text: "Mobile",
-  },
-  {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/82b3ca5fb2301045.png?q=100",
-    text: "Fashion",
-  },
-  {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/da4491af4ee551d6.png?q=100",
     text: "Electronics",
   },
   {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/ee162bad964c46ae.png?q=100",
-    text: "Home & Furniture",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/3a39bad95503b051.png?q=100",
+    text: "TV & Appliances",
   },
   {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/0ff199d1bd27eb98.png?q=100",
-    text: "Appliances",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/f7b2a4eeb35a8c9f.png?q=100",
+    text: "Fashion",
   },
   {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/71050627a56b4693.png?q=100",
-    text: "Travel",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/e83a5f27b01d9a7e.png?q=100",
+    text: "Beauty",
   },
   {
-    url: "https://rukminim1.flixcart.com/flap/128/128/image/dff3f7adcf3a90c6.png?q=100",
-    text: "Beauty, Toys & More",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/a8cfa33c7206ae57.png?q=100",
+    text: "Home & Kitchen",
   },
   {
-    url: "https://rukminim1.flixcart.com/fk-p-flap/128/128/image/05d708653beff580.png?q=100",
-    text: "Two Wheelers",
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/4e0bdf8567ecb960.png?q=100",
+    text: "Furniture",
+  },
+  {
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/def8193d5a7380ee.png?q=100",
+    text: "Flights",
+  },
+  {
+    url: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/aecfaba5969b96dd.png?q=100",
+    text: "Grocery",
   },
 ];
 
@@ -60,15 +60,26 @@ export const bannerData = [
   },
 ];
 
-
 export const midBanner = [
   {
-    url:"https://rukminim1.flixcart.com/fk-p-flap/520/280/image/d9f629cced0a451d.jpg?q=20"
+    url: "https://rukminim1.flixcart.com/fk-p-flap/520/280/image/d9f629cced0a451d.jpg?q=20",
   },
   {
-    url:"https://rukminim1.flixcart.com/fk-p-flap/520/280/image/15340d3009e6bf94.png?q=20"
+    url: "https://rukminim1.flixcart.com/fk-p-flap/520/280/image/15340d3009e6bf94.png?q=20",
   },
   {
-    url:"https://rukminim1.flixcart.com/fk-p-flap/520/280/image/df072b1963b13fdf.jpeg?q=20"
-  }
-]
+    url: "https://rukminim1.flixcart.com/fk-p-flap/520/280/image/df072b1963b13fdf.jpeg?q=20",
+  },
+];
+
+
+// Footer
+
+export const about = ["Contact Us","About Us","Careers","Flipkart Stories","Press","Flipkart Wholesale","Corporate Information"];
+
+export const help = ["Payments","Shipping","Cancellation & Returns","FAQ","Report Infringement"];
+
+export const consumerPolicy = ["Return Policy","Terms Of Use","Security","Privacy","Sitemap","Grievance Redressal","EPR Compliance"];
+
+export const social = ["Facebook","Twitter","YouTube"];
+

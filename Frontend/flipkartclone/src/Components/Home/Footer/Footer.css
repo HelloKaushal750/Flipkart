@@ -1,0 +1,17 @@
+.register_office>p{
+    color: white;
+}
+.footer_tag>p:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.footer_footer{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+.footer_footer>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
