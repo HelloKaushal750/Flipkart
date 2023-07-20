@@ -1,6 +1,7 @@
 const initialState = {
   showLogin: false,
   loggedInUser: "",
+  isHomePage: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,9 @@ const reducer = (state = initialState, action) => {
     }
     case "USERNAME": {
       return { ...state, loggedInUser: action.payload };
+    }
+    case "HOMEPAGE": {
+      return { ...state, isHomePage: action.payload };
     }
     default: {
       return state;

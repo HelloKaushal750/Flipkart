@@ -2,6 +2,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Slider({ search, banner, title, url }) {
   const responsive = {
@@ -19,7 +20,7 @@ function Slider({ search, banner, title, url }) {
     },
   };
   const [data, setData] = useState([]);
-  console.log(search);
+  // console.log(search);
   useEffect(() => {
     axios.get(`http://localhost:7000/products?search=${search}`).then((res) => {
       let filterData = res.data.map((ele) => {
@@ -27,11 +28,12 @@ function Slider({ search, banner, title, url }) {
           return ele;
         } else {
           const truncatedText = ele.name.substring(0, 15) + "...";
-          console.log(truncatedText);
+          // console.log(truncatedText);
           ele.name = truncatedText;
           return ele;
         }
       });
+      // console.log(filterData);
       setData(filterData);
     });
   }, []);
@@ -64,12 +66,14 @@ function Slider({ search, banner, title, url }) {
           }}
         >
           <h1 style={{ fontWeight: "600" }}>{title}</h1>
-          <button>
-            <i
-              class="fa-solid fa-circle-arrow-right"
-              style={{ color: "#2874f0" }}
-            ></i>
-          </button>
+          <Link to={"/product"}>
+            <button>
+              <i
+                class="fa-solid fa-circle-arrow-right"
+                style={{ color: "#2874f0" }}
+              ></i>
+            </button>
+          </Link>
         </div>
 
         <Carousel
@@ -95,7 +99,7 @@ function Slider({ search, banner, title, url }) {
               >
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <img
-                    src={item.thumbnail}
+                    src={item.thumbnails[0]}
                     alt=""
                     style={{ width: "auto", height: "150px" }}
                   />
@@ -117,11 +121,7 @@ function Slider({ search, banner, title, url }) {
       </div>
       {banner && (
         <div>
-          <img
-            src={url}
-            alt=""
-            height={"150px"}
-          />
+          <img src={url} alt="" height={"150px"} />
         </div>
       )}
     </div>

@@ -1,13 +1,18 @@
-import Header from "./Header/Header";
 import HomeSlider from "./Home-Slider/HomeSlider";
 import Slider from "./Slider/Slider";
-import {Banner, Banner2} from "./Banner/Banner";
+import { Banner, Banner2 } from "./Banner/Banner";
 import Footer from "./Footer/Footer";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "HOMEPAGE", payload: true });
+  }, []);
+
   return (
     <div>
-      <Header />
       <div
         style={{
           padding: "10px",
@@ -17,7 +22,7 @@ function Home() {
       >
         <HomeSlider />
         <Slider
-          search={"topdeal"}
+          search={"topoffer"}
           banner={true}
           title={"Top Offers"}
           url={
