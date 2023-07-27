@@ -8,7 +8,7 @@ const fetch = (...args) =>
 ProductController.get("/", async (req, res) => {
   try {
     const product = await ProductModel.find({});
-    if (!req.query.page && !req.query.search) {
+    if (!req.query.page && !req.query.search && !req.query.sort) {
       const product = await ProductModel.find({});
       if (product.length > 0) {
         res.status(200).json(product);
@@ -17,8 +17,9 @@ ProductController.get("/", async (req, res) => {
       }
     } else {
       const page = parseInt(req.query.page) || 1;
-      const limit = 20;
+      const limit = 10;
       const search = req.query.search;
+      const sort = req.query.sort;
 
       const filter = {};
       if (search) {
@@ -28,7 +29,19 @@ ProductController.get("/", async (req, res) => {
         const data = await ProductModel.find(filter)
           .skip((page - 1) * limit)
           .limit(limit);
-        res.status(200).json(data);
+
+        if (sort) {
+          const sortedData = data.slice().sort((a, b) => {
+            if (sort === "desc") {
+              return b.current_price - a.current_price;
+            }else if (sort === 'asc'){
+              return a.current_price - b.current_price;
+            }
+          });
+          res.status(200).json(sortedData);
+        } else {
+          res.status(200).json(data);
+        }
       } catch (error) {
         res.status(404).json({ message: "Something went wrong" });
         console.log(error);
@@ -69,16 +82,15 @@ ProductController.post("/", (req, res) => {
   }
 });
 
-
-ProductController.delete("/",async (req,res)=>{
+ProductController.delete("/", async (req, res) => {
   try {
-    const query = { "thumbnails": { $size: 0 } };
-    const deletedItem = await ProductModel.deleteMany(query)
+    const query = { thumbnails: { $size: 0 } };
+    const deletedItem = await ProductModel.deleteMany(query);
     console.log(deletedItem);
-    res.status(404).json({ message: "Deleted Successfully",deletedItem });
+    res.status(404).json({ message: "Deleted Successfully", deletedItem });
   } catch (error) {
     res.status(404).json({ message: error });
   }
-})
+});
 
 module.exports = { ProductController };

@@ -66,7 +66,7 @@ function Slider({ search, banner, title, url }) {
           }}
         >
           <h1 style={{ fontWeight: "600" }}>{title}</h1>
-          <Link to={"/product"}>
+          <Link to={`/product/${search}`}>
             <button>
               <i
                 class="fa-solid fa-circle-arrow-right"
@@ -87,34 +87,39 @@ function Slider({ search, banner, title, url }) {
         >
           {data.map((item, i) => {
             return (
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "25px 15px",
-                  backgroundColor: "white",
-                  border: "1px solid rgb(194, 194, 194)",
-                  marginRight: "20px",
-                  borderRadius: "5px",
-                }}
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img
-                    src={item.thumbnails[0]}
-                    alt=""
-                    style={{ width: "auto", height: "150px" }}
-                  />
-                </div>
-                <p
+              <Link to={`/${item._id}`}>
+                <div
+                  key={i}
                   style={{
-                    marginTop: "5px",
-                    fontWeight: "100",
-                    fontSize: "14px",
+                    textAlign: "center",
+                    padding: "25px 15px",
+                    backgroundColor: "white",
+                    border: "1px solid rgb(194, 194, 194)",
+                    marginRight: "20px",
+                    borderRadius: "5px",
                   }}
                 >
-                  {item.name}
-                </p>
-                <p style={{ fontWeight: "600" }}>From ₹{item.current_price}</p>
-              </div>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <img
+                      src={item.thumbnails[0]}
+                      alt=""
+                      style={{ width: "auto", height: "150px" }}
+                    />
+                  </div>
+                  <p
+                    style={{
+                      marginTop: "5px",
+                      fontWeight: "100",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {item.name}
+                  </p>
+                  <p style={{ fontWeight: "600" }}>
+                    From ₹{item.current_price}
+                  </p>
+                </div>
+              </Link>
             );
           })}
         </Carousel>

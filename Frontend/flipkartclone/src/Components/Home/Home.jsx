@@ -9,6 +9,9 @@ function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: "HOMEPAGE", payload: true });
+    return ()=>{
+      dispatch({ type: "HOMEPAGE", payload: false });
+    }
   }, []);
 
   return (

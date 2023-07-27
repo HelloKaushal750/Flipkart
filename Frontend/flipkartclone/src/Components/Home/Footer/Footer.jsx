@@ -4,7 +4,7 @@ import "./Footer.css";
 function Footer() {
   return (
     <div
-      style={{ width: "100%", backgroundColor: "#212121", fontSize: "12px" }}
+      style={{ width: "100%", backgroundColor: "#172337", fontSize: "12px",marginTop:"50px" }}
     >
       <div
         style={{
