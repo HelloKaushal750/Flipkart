@@ -1,7 +1,6 @@
 import HomeSlider from "./Home-Slider/HomeSlider";
 import Slider from "./Slider/Slider";
 import { Banner, Banner2 } from "./Banner/Banner";
-import Footer from "./Footer/Footer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -54,7 +53,6 @@ function Home() {
           title={"Deals for Summer"}
         />
       </div>
-      <Footer />
     </div>
   );
 }
