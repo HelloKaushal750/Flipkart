@@ -1,0 +1,30 @@
+.productDetail{
+    padding: 0 50px 0 50px;
+    background-color: #f1f3f6;
+}
+.image_container{
+    border: 1px solid rgb(227, 227, 227);
+    padding: 15px;
+}
+.love_btn{
+    border: 1px solid grey;
+    font-size: 14px;
+    padding: 6px;
+    border-radius: 50%;
+    width: 36px;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    border: none;
+}
+.buy-cart-btn-div{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+.buy-cart-btn-div>button{
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}

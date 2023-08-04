@@ -20,25 +20,33 @@ function HomeSlider() {
   };
 
   return (
-    <Carousel
-      dotListClass="custom-dot-list-style"
-      itemClass="carousel-item-padding-40-px"
-      swipeable={false}
-      draggable={false}
-      containerClass="carousel-container"
-      slidesToSlide={1}
-      infinite={true}
-      autoPlay={true}
-      autoPlaySpeed={4000}
-      responsive={responsive}
-    >
-      {bannerData.map((item,i) => {
-        return <img key={i} src={item.url} alt="" width={"100%"} height={"240px"} />;
-      })}
-    </Carousel>
+    <div>
+      <Carousel
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+        swipeable={false}
+        draggable={false}
+        containerClass="carousel-container"
+        slidesToSlide={1}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={4000}
+        responsive={responsive}
+      >
+        {bannerData.map((item, i) => {
+          return (
+            <img
+              key={i}
+              src={item.url}
+              alt=""
+              width={"100%"}
+              height={"240px"}
+            />
+          );
+        })}
+      </Carousel>
+    </div>
   );
 }
 
 export default HomeSlider;
-
-

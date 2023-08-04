@@ -3,7 +3,8 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 15px 80px;
+  padding: 70px 80px 15px 80px;
+  border-bottom: 1px solid rgb(179, 179, 179);
 }
 #firstPanel > div {
   text-align: center;

@@ -17,6 +17,9 @@ body {
   align-items: center;
   margin: 0;
   padding: 0;
+  opacity: 1;
+  position: fixed;
+  z-index: 1;
 }
 
 #navImage {
@@ -63,7 +66,7 @@ body {
   color: #2874f0;
   /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 }
-.dropdown>.dropbtn {
+.dropdown > .dropbtn {
   /* width: 120px; */
   font-size: 15px;
   color: #2874f0;
