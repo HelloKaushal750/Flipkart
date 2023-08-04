@@ -34,7 +34,7 @@ ProductController.get("/", async (req, res) => {
           const sortedData = data.slice().sort((a, b) => {
             if (sort === "desc") {
               return b.current_price - a.current_price;
-            }else if (sort === 'asc'){
+            } else if (sort === "asc") {
               return a.current_price - b.current_price;
             }
           });
@@ -50,6 +50,20 @@ ProductController.get("/", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.send(error);
+  }
+});
+
+ProductController.get("/:productId", async (req, res) => {
+  try {
+    const {productId} = req.params;
+    const product = await ProductModel.find({_id:productId});
+    if (product.length>0) {
+      res.status(200).json(product);
+    } else {
+      res.status(200).json({ message: "No Product Found!" });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error });
   }
 });
 

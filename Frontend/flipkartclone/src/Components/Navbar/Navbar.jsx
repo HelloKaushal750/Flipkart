@@ -9,13 +9,20 @@ import {
 } from "@chakra-ui/react";
 import Signup from "../Signup/Signup";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const [inputSearch, setInputSearch] = useState("");
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const username = useSelector((state) => {
     return state.loggedInUser;
   });
+  const handleSearch = ()=>{
+    navigate(`/product/${inputSearch}`)
+  }
   return (
     <div id="navbar">
       <div id="navImage">
@@ -62,8 +69,9 @@ function Navbar() {
             type="text"
             placeholder="Search for products, brands and more"
             className="no-outline"
+            onChange={(e)=>{setInputSearch(e.target.value)}}
           />
-          <button type="submit">
+          <button type="submit" onClick={handleSearch}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
