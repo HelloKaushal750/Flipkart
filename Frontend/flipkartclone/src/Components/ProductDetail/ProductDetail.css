@@ -5,6 +5,7 @@
 .image_container{
     border: 1px solid rgb(227, 227, 227);
     padding: 15px;
+    margin-top: 5px;
 }
 .love_btn{
     border: 1px solid grey;
@@ -27,4 +28,11 @@
     font-weight: 600;
     color: white;
     cursor: pointer;
+}
+.right_productdetail{
+    padding: 5px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
 }

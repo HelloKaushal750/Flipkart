@@ -24,9 +24,9 @@ function Footer() {
           <div>
             <h3 style={{ color: "#86837e", marginBottom: "10px" }}>ABOUT</h3>
             <div className="footer_tag">
-              {about.map((ele) => {
+              {about.map((ele,i) => {
                 return (
-                  <p style={{ color: "white", fontWeight: "600" }}>{ele}</p>
+                  <p key={i} style={{ color: "white", fontWeight: "600" }}>{ele}</p>
                 );
               })}
             </div>
@@ -34,9 +34,9 @@ function Footer() {
           <div>
             <h3 style={{ color: "#86837e", marginBottom: "10px" }}>HELP</h3>
             <div className="footer_tag">
-              {help.map((ele) => {
+              {help.map((ele,i) => {
                 return (
-                  <p style={{ color: "white", fontWeight: "600" }}>{ele}</p>
+                  <p key={i} style={{ color: "white", fontWeight: "600" }}>{ele}</p>
                 );
               })}
             </div>
@@ -46,9 +46,9 @@ function Footer() {
               CONSUMER POLICY
             </h3>
             <div className="footer_tag">
-              {consumerPolicy.map((ele) => {
+              {consumerPolicy.map((ele,i) => {
                 return (
-                  <p style={{ color: "white", fontWeight: "600" }}>{ele}</p>
+                  <p key={i} style={{ color: "white", fontWeight: "600" }}>{ele}</p>
                 );
               })}
             </div>
@@ -56,9 +56,9 @@ function Footer() {
           <div>
             <h3 style={{ color: "#86837e", marginBottom: "10px" }}>SOCIAL</h3>
             <div className="footer_tag">
-              {social.map((ele) => {
+              {social.map((ele,i) => {
                 return (
-                  <p style={{ color: "white", fontWeight: "600" }}>{ele}</p>
+                  <p key={i} style={{ color: "white", fontWeight: "600" }}>{ele}</p>
                 );
               })}
             </div>

@@ -69,7 +69,7 @@ function Slider({ search, banner, title, url }) {
           <Link to={`/product/${search}`}>
             <button>
               <i
-                class="fa-solid fa-circle-arrow-right"
+                className="fa-solid fa-circle-arrow-right"
                 style={{ color: "#2874f0" }}
               ></i>
             </button>
@@ -87,9 +87,8 @@ function Slider({ search, banner, title, url }) {
         >
           {data.map((item, i) => {
             return (
-              <Link to={`/${item._id}`}>
+              <Link to={`/${item._id}`}  key={i}>
                 <div
-                  key={i}
                   style={{
                     textAlign: "center",
                     padding: "25px 15px",

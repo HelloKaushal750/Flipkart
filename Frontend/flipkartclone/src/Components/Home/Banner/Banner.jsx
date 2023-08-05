@@ -3,8 +3,8 @@ import { midBanner } from "../../../constant/data";
 function Banner() {
   return (
     <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"10px",padding:'10px',backgroundColor:"white",marginTop:"15px"}}>
-      {midBanner.map((item) => {
-        return <img src={item.url} alt="" />
+      {midBanner.map((item,i) => {
+        return <img src={item.url} key={i} alt="" />
       })}
     </div>
   );

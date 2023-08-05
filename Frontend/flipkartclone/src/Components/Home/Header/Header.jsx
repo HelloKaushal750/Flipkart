@@ -11,9 +11,8 @@ function Header() {
     <div id="firstPanel">
       {navData.map((item, i) => {
         return (
-          <Link to={`/product/${item.category}`}>
+          <Link key={i} to={`/product/${item.category}`}>
             <div
-              key={i}
               style={{
                 display: "flex",
                 flexDirection: "column",
