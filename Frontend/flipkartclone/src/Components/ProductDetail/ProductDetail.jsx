@@ -27,7 +27,7 @@ function ProductDetail() {
       let filterData = res.data?.map((ele) => {
         const modifiedString = removeRepeatedWord(ele.name);
         if (modifiedString.length > 80) {
-          const truncatedText = modifiedString.substring(0, 80) + "...";
+          const truncatedText = modifiedString.substring(0, 80);
           ele.name = truncatedText;
         } else {
           ele.name = modifiedString;
@@ -38,7 +38,8 @@ function ProductDetail() {
         first:
           filterData[0].category[0].toUpperCase() +
           filterData[0].category.slice(1),
-        second: filterData[0].name[0].toUpperCase() + filterData[0].name.slice(1, 15),
+        second:
+          filterData[0].name[0].toUpperCase() + filterData[0].name.slice(1, 15),
       });
       setData(filterData[0]);
     });
@@ -96,9 +97,8 @@ function ProductDetail() {
           >
             <div>
               <p style={{ color: "grey", fontSize: "12px" }}>
-                Home&nbsp; > &nbsp; 
-                {link.first}&nbsp; > 
-                &nbsp;{link.second}...
+                Home&nbsp; > &nbsp;
+                {link.first}&nbsp; > &nbsp;{link.second}...
               </p>
             </div>
             <div
@@ -163,8 +163,227 @@ function ProductDetail() {
               Extra ₹{data.original_price - data.current_price} off
             </h3>
           </div>
+          <div
+            style={{
+              marginTop: "-8px",
+              display: "flex",
+              alignItems: "baseline",
+              gap: "15px",
+            }}
+          >
+            <h1 style={{ fontSize: "30px" }}>₹{data.current_price}</h1>
+            <h3 style={{ color: "grey", textDecoration: "line-through" }}>
+              ₹{data.original_price}
+            </h3>
+            <h3 style={{ color: "green" }}>{data.discount_percent}% off</h3>
+            <div>
+              <i
+                class="fa-solid fa-circle-info"
+                style={{
+                  color: "white",
+                  backgroundColor: "rgb(198, 197, 197)",
+                  borderRadius: "50%",
+                  border: "2px solid rgb(198, 197, 197)",
+                  fontSize: "12px",
+                }}
+              ></i>
+            </div>
+          </div>
           <div>
-            <h1>₹{data.current_price}</h1>
+            <div>
+              <h1 style={{ fontSize: "16px", fontWeight: "600" }}>
+                Avaliable offers
+              </h1>
+            </div>
+            {data.offers ? (
+              <div>
+                {data.offers.map((ele) => {
+                  return (
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        fontSize: "14px",
+                        alignItems: "baseline",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <i
+                        class="fa-solid fa-tag"
+                        style={{ color: "#13bd46" }}
+                      ></i>
+                      <h3>
+                        <span style={{ fontWeight: "600" }}>
+                          {ele.split(":")[0]}
+                        </span>{" "}
+                        {ele.split(":")[1]}
+                      </h3>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div>
+                <h3 style={{ color: "red" }}>No offer available!</h3>
+              </div>
+            )}
+          </div>
+          <div style={{ width: "50%", marginTop: "20px", fontSize: "14px" }}>
+            <div
+              style={{
+                border: "1px solid rgb(198, 197, 197)",
+                padding: "15px",
+                display: "flex",
+                justifyContent: "space-between",
+                backgroundColor: "#f5faff",
+              }}
+            >
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "20px" }}
+              >
+                <input type="radio" checked />
+                <h3>Buy without Exchange</h3>
+              </div>
+              <div>
+                <h3 style={{ fontWeight: "600", fontSize: "15px" }}>
+                  ₹{data.current_price}
+                </h3>
+              </div>
+            </div>
+            <div
+              style={{
+                border: "1px solid rgb(198, 197, 197)",
+                borderTop: "none",
+                cursor: "no-drop",
+              }}
+            >
+              <div
+                style={{
+                  padding: "15px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  color: "grey",
+                }}
+              >
+                <div style={{ display: "flex", gap: "20px" }}>
+                  <input type="radio" style={{ cursor: "no-drop" }} />
+                  <h3>Buy with Exchange</h3>
+                </div>
+                <div>
+                  <h3>up to ₹{data.current_price * (0.95).toFixed(1)} off</h3>
+                </div>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    marginLeft: "48px",
+                    marginTop: "-8px",
+                    marginBottom: "20px",
+                    color: "red",
+                  }}
+                >
+                  Enter pincode to check if exchange is available
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              gap: "30px",
+              alignItems: "center",
+              marginTop: "40px",
+            }}
+          >
+            <div
+              style={{
+                width: "80px",
+                border: "1px solid rgb(234, 232, 232)",
+                padding: "2px",
+                height: "30px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src="https://rukminim2.flixcart.com/image/160/160/cms-brand/e5e7f2f1c25176753af9c4390b9c0124712a01145d504876f32d2cac02b69eec.jpg?q=90"
+                alt=""
+                style={{ height: "80%" }}
+              />
+            </div>
+            <div>
+              <p style={{ fontSize: "14px" }}>1 Year Brand Warranty</p>
+            </div>
+          </div>
+          <div>
+            <div
+              style={{
+                display: "flex",
+                gap: "42px",
+                marginTop: "15px",
+                fontSize: "14px"
+              }}
+            >
+              <div>
+                <h3 style={{ color: "grey", fontWeight: "600" }}>Highlights</h3>
+              </div>
+              <div>
+                {data.highlights ? (
+                  <ul style={{marginTop:"-8px"}}>
+                    {data.highlights?.map((ele) => {
+                      return (
+                        <li
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            marginBottom:"-5px"
+                          }}
+                        >
+                          {ele}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: "68px", marginTop: "20px" }}>
+              <div>
+                <h3 style={{ color: "grey", fontWeight: "600" }}>Seller</h3>
+              </div>
+              <div
+                style={{ display: "flex", gap: "10px", alignItems: "center" }}
+              >
+                <h3 style={{ fontSize: "15px", color: "#2874f0" }}>
+                  Vision Star
+                </h3>
+
+                <button
+                  style={{
+                    color: "white",
+                    backgroundColor: "#2874f0",
+                    width: "40px",
+                    height: "20px",
+                    fontSize: "10px",
+                    borderRadius: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: "600",
+                  }}
+                >
+                  {data.rating}&nbsp;
+                  <i
+                    class="fa-solid fa-star"
+                    style={{ fontSize: "9px", marginTop: "-3px" }}
+                  ></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
