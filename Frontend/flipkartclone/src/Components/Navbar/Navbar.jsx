@@ -23,6 +23,13 @@ function Navbar() {
   const handleSearch = ()=>{
     navigate(`/product/${inputSearch}`)
   }
+  const gotToCart = ()=>{
+    if(!localStorage.getItem("token")){
+      alert("Please Login")
+    }else{
+      navigate("/cart")
+    }
+  }
   return (
     <div id="navbar">
       <div id="navImage">
@@ -215,7 +222,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div id="iconCart">
+        <div id="iconCart" onClick={gotToCart}>
           <i className="fa-solid fa-cart-shopping"></i>
           <button>Cart</button>
         </div>

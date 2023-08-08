@@ -2,6 +2,18 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ProductDetail.css";
+import Slider from "../Home/Slider/Slider";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+  Button,
+  useDisclosure
+} from "@chakra-ui/react";
+import React from "react";
 
 function removeRepeatedWord(inputString) {
   const words = inputString.split(" ");
@@ -16,6 +28,8 @@ function removeRepeatedWord(inputString) {
 }
 
 function ProductDetail() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
   const [data, setData] = useState({});
   const [link, setLink] = useState({
     first: "",
@@ -45,6 +59,34 @@ function ProductDetail() {
     });
   }, []);
   console.log(data);
+
+  const handleCart = () => {
+    fetch("http://localhost:7000/addtocart", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        if (
+          res.message === "Please login" ||
+          res.message === "Please login again"
+        ) {
+          alert("Please Login");
+        } else {
+          onOpen();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Something went wrong");
+      });
+  };
 
   return (
     <div className="productDetail">
@@ -79,13 +121,35 @@ function ProductDetail() {
             </div>
           </div>
           <div className="buy-cart-btn-div">
-            <button style={{ backgroundColor: "#ff9f00" }}>
+            <button style={{ backgroundColor: "#ff9f00" }} onClick={handleCart}>
               <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp; ADD TO CART
             </button>
             <button style={{ backgroundColor: "#fb641b" }}>
               <i class="fa-solid fa-bolt-lightning"></i>&nbsp;&nbsp; BUY NOW
             </button>
           </div>
+          <>
+          <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+
+            <AlertDialogBody >
+              Product Added Successfully into Cart!
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <button style={{backgroundColor:'#2874f0',color:"white",padding:"5px 10px",borderRadius:"5px"}}  onClick={onClose}>
+                Ok
+              </button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+          </>
         </div>
         <div className="right_productdetail">
           <div
@@ -322,7 +386,7 @@ function ProductDetail() {
                 display: "flex",
                 gap: "42px",
                 marginTop: "15px",
-                fontSize: "14px"
+                fontSize: "14px",
               }}
             >
               <div>
@@ -330,7 +394,7 @@ function ProductDetail() {
               </div>
               <div>
                 {data.highlights ? (
-                  <ul style={{marginTop:"-8px"}}>
+                  <ul className="higlight_list" style={{ marginTop: "-8px" }}>
                     {data.highlights?.map((ele) => {
                       return (
                         <li
@@ -338,7 +402,7 @@ function ProductDetail() {
                             display: "flex",
                             alignItems: "center",
                             gap: "10px",
-                            marginBottom:"-5px"
+                            marginBottom: "-5px",
                           }}
                         >
                           {ele}
@@ -347,11 +411,18 @@ function ProductDetail() {
                     })}
                   </ul>
                 ) : (
-                  <div></div>
+                  <div style={{ color: "red" }}>No Highlights!</div>
                 )}
               </div>
             </div>
-            <div style={{ display: "flex", gap: "68px", marginTop: "20px" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "73px",
+                marginTop: "20px",
+                fontSize: "14px",
+              }}
+            >
               <div>
                 <h3 style={{ color: "grey", fontWeight: "600" }}>Seller</h3>
               </div>
@@ -384,9 +455,68 @@ function ProductDetail() {
                 </button>
               </div>
             </div>
+            {data.specs &&
+              data.specs.map((ele) => {
+                return (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "12.5% 87.5%",
+                      gap: "10px",
+                      marginTop: "15px",
+                      fontSize: "14px",
+                    }}
+                  >
+                    <div>
+                      <h3 style={{ color: "grey", fontWeight: "600" }}>
+                        {ele.title}
+                      </h3>
+                    </div>
+                    <div>
+                      {ele.details ? (
+                        <ul
+                          className="higlight_list"
+                          style={{ marginTop: "-8px" }}
+                        >
+                          {ele.details?.map((item) => {
+                            return (
+                              <div>
+                                {item.value.length < 90 && (
+                                  <li
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      gap: "10px",
+                                      marginBottom: "-5px",
+                                    }}
+                                  >
+                                    <span style={{ fontWeight: "600" }}>
+                                      {item.property}
+                                    </span>
+                                    : {item.value}
+                                  </li>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </ul>
+                      ) : (
+                        <div style={{ color: "red" }}>No Highlights!</div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
+      {data.category && (
+        <Slider
+          search={data.category}
+          banner={false}
+          title={"Related Products"}
+        />
+      )}
     </div>
   );
 }

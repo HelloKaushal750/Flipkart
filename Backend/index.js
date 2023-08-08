@@ -4,6 +4,9 @@ const cors = require("cors");
 const { connection } = require("./config/db");
 const { UserController } = require("./controllers/Users.controllers");
 const { ProductController } = require("./controllers/Products.controllers");
+const { authenticate } = require("./middleware/authenticate");
+const { CartController } = require("./controllers/AddToCart.controllers");
+
 
 const app = express();
 
@@ -14,6 +17,11 @@ app.use(cors());
 app.use("/", UserController);
 
 app.use("/products", ProductController);
+
+app.use(authenticate);
+
+app.use("/addtocart", CartController)
+
 
 const port = process.env.PORT;
 

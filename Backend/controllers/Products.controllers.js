@@ -78,7 +78,6 @@ ProductController.post("/", (req, res) => {
         "X-RapidAPI-Key": "your-rapidapi-key",
       },
     };
-    // console.log(products);
     products.map((item) => {
       let url = item.query_url;
       fetch(url, options)
@@ -106,5 +105,8 @@ ProductController.delete("/", async (req, res) => {
     res.status(404).json({ message: error });
   }
 });
+
+
+
 
 module.exports = { ProductController };

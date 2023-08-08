@@ -15,7 +15,7 @@ const ProductSchema = mongoose.Schema({
   highlights:Array,
   offers:Array,
   specs:Array,
-  category:{type:String,required:true,default:'coolsummer'}
+  category:{type:String,required:true}
 });
 
 const ProductModel = mongoose.model("productdetails", ProductSchema);
