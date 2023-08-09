@@ -84,9 +84,9 @@ function Cart() {
             </button>
           </div>
           {data.length > 0 ? (
-            <div>
-              {data?.map((ele) => {
-                return <CartProduct data={ele} />;
+            <div style={{backgroundColor:"white"}}>
+              {data?.map((ele,i) => {
+                return <CartProduct data={ele} index={i} key={i} />;
               })}
             </div>
           ) : (

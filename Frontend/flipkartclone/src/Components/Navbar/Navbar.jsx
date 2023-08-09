@@ -33,11 +33,11 @@ function Navbar() {
   return (
     <div id="navbar">
       <div id="navImage">
-        <img
+        <Link to={'/'}><img
           src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png"
           alt=""
           width="100px"
-        />
+        /></Link>
         <div
           style={{
             marginTop: "-5px",

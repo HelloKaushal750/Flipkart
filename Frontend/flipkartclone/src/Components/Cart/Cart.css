@@ -6,16 +6,18 @@
     gap:15px;
 }
 .left_cart{
-    border: 1px solid black;
     display: flex;
     gap:15px;
     flex-direction: column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 5px;
 }
 .cart_option{
     display: flex;
     justify-content: space-around;
     padding: 0 15px;
     background-color: white;
+    border-radius: 5px;
 }
 .cart_option button{
     font-size: 16px;

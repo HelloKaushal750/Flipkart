@@ -113,3 +113,11 @@ export const consumerPolicy = [
 ];
 
 export const social = ["Facebook", "Twitter", "YouTube"];
+
+export const delivery = [
+  "Delivery by 11 PM, Tomorrow",
+  "Delivery by 10 PM, Today",
+  "Delivery by Sun Aug 13",
+  "Delivery by Mon Aug 14",
+  "Delivery by Fri Aug 18",
+];
