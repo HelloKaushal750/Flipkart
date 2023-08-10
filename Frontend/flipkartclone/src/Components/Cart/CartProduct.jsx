@@ -14,12 +14,18 @@ import {
 import { useToast } from "@chakra-ui/react";
 import { removeFromCart } from "../../Redux/action";
 import { movetosave } from "../../Redux/action";
+import { useEffect } from "react";
+import { cartQuantity } from "../../Redux/action";
 
 function CartProduct({ data, index, setData, setSavedData, btnheading }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const toast = useToast();
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(data.quantity);
+
+  useEffect(() => {
+    cartQuantity(data._id, quantity, toast, data.name, setData, setQuantity);
+  }, [quantity]);
 
   return (
     <div className="cart_product_page">
@@ -62,7 +68,7 @@ function CartProduct({ data, index, setData, setSavedData, btnheading }) {
           >
             -
           </button>
-          <button className="display_quantity">{quantity}</button>
+          <button className="display_quantity">{data.quantity}</button>
           <button
             className="inc_dec_btn"
             style={
@@ -126,10 +132,10 @@ function CartProduct({ data, index, setData, setSavedData, btnheading }) {
               fontSize: "14px",
             }}
           >
-            ₹{data.original_price}
+            ₹{data.original_price*data.quantity}
           </p>
           <h3 style={{ fontSize: "18px", fontWeight: "600" }}>
-            ₹{data.current_price}
+            ₹{data.current_price*data.quantity}
           </h3>
           <p style={{ color: "green", fontSize: "14px" }}>
             {data.discount_percent}% Off

@@ -32,7 +32,7 @@ function Cart() {
   return (
     <div style={{ backgroundColor: "#f1f3f6", padding: "15px 0" }}>
       <div className="cart_page">
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
           <div className="left_cart">
             <div className="cart_option">
               <button

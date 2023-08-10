@@ -46,4 +46,19 @@ CartController.delete("/:cartitemid", async (req, res) => {
   }
 });
 
+CartController.patch("/qty/:savedId", async (req, res) => {
+  try {
+    const { savedId } = req.params;
+    const { setquantity } = req.body;
+    const updatedData = await CartModel.findByIdAndUpdate(
+      { _id: savedId },
+      { $set: { quantity: setquantity } }
+    );
+    res.status(200).json({ message: "Item Updated Successfully", updatedData });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error });
+  }
+});
+
 module.exports = { CartController };

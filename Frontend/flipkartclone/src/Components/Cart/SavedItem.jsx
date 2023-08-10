@@ -1,5 +1,5 @@
 import "./CartProduct.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { delivery } from "../../constant/data";
 import React from "react";
 import {
@@ -14,12 +14,17 @@ import {
 import { useToast } from "@chakra-ui/react";
 import { removeFromSaved } from "../../Redux/action";
 import { movetocart } from "../../Redux/action";
+import { savedQuantity } from "../../Redux/action";
 
 function SavedItem({ data, index, setData, setSavedData, btnheading }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const toast = useToast();
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(data.quantity);
+
+  useEffect(() => {
+    savedQuantity(data._id, quantity, toast, data.name, setSavedData, setQuantity);
+  }, [quantity]);
 
   return (
     <div className="cart_product_page">
@@ -62,7 +67,7 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
           >
             -
           </button>
-          <button className="display_quantity">{quantity}</button>
+          <button className="display_quantity">{data.quantity}</button>
           <button
             className="inc_dec_btn"
             style={
@@ -126,10 +131,10 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
               fontSize: "14px",
             }}
           >
-            ₹{data.original_price}
+            ₹{data.original_price*data.quantity}
           </p>
           <h3 style={{ fontSize: "18px", fontWeight: "600" }}>
-            ₹{data.current_price}
+            ₹{data.current_price*data.quantity}
           </h3>
           <p style={{ color: "green", fontSize: "14px" }}>
             {data.discount_percent}% Off
@@ -149,7 +154,7 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
         <div className="remove_btn_div" style={{ marginTop: "20px" }}>
           <button
             onClick={() => {
-                movetocart(data._id, setData, setSavedData,toast,data.name);
+              movetocart(data._id, setData, setSavedData, toast, data.name);
             }}
           >
             {btnheading}

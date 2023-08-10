@@ -71,6 +71,35 @@ export const movetosave = (id, setData, setSavedData, toast, name) => {
     });
 };
 
+export const cartQuantity = (
+  savedId,
+  setquantity,
+  toast,
+  name,
+  setData,
+  setQuantity
+) => {
+  fetch(`http://localhost:7000/addtocart/qty/${savedId}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ setquantity }),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      getCartItem(setData);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("Something went wrong");
+    });
+};
+
 export const getSavedItem = (setSavedData) => {
   fetch("http://localhost:7000/saveditem", {
     method: "GET",
@@ -136,6 +165,35 @@ export const removeFromSaved = (id, data, setSavedData, toast) => {
         duration: 3000,
         isClosable: true,
       });
+      getSavedItem(setSavedData);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("Something went wrong");
+    });
+};
+
+export const savedQuantity = (
+  id,
+  setquantity,
+  toast,
+  name,
+  setSavedData,
+  setQuantity
+) => {
+  fetch(`http://localhost:7000/saveditem/quantity/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ setquantity }),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
       getSavedItem(setSavedData);
     })
     .catch((err) => {

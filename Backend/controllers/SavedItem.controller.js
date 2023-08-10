@@ -135,4 +135,18 @@ SavedItemController.delete("/removeitem/:savedId", async (req, res) => {
   }
 });
 
+SavedItemController.patch("/quantity/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { setquantity } = req.body;
+    const updatedData = await SavedItemModel.findByIdAndUpdate(
+      { _id: id },
+      { $set: { quantity: setquantity } }
+    );
+    res.status(200).json({ message: "Item Updated Successfully", updatedData });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+});
+
 module.exports = { SavedItemController };
