@@ -30,7 +30,7 @@ function Cart() {
   }, []);
   console.log(savedData);
   return (
-    <div style={{ backgroundColor: "#f1f3f6", padding: "15px 0" }}>
+    <div style={{ backgroundColor: "#f1f3f6", padding: "15px 0",paddingBottom:"100px" }}>
       <div className="cart_page">
         <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
           <div className="left_cart">
