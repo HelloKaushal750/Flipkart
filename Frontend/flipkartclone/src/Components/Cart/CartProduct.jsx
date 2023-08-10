@@ -1,30 +1,26 @@
 import "./CartProduct.css";
 import { useState } from "react";
 import { delivery } from "../../constant/data";
-import { getCartItem } from "../../Redux/action";
+import React from "react";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
+import { removeFromCart } from "../../Redux/action";
+import { movetosave } from "../../Redux/action";
 
-function CartProduct({ data, index, setData }) {
+function CartProduct({ data, index, setData, setSavedData }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
+  const toast = useToast();
   const [quantity, setQuantity] = useState(1);
-  const removeFromCart = (id) => {
-    fetch(`http://localhost:7000/addtocart/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        alert(res.message);
-        getCartItem(setData);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Something went wrong");
-      });
-  };
+
   return (
     <div className="cart_product_page">
       <div
@@ -36,7 +32,7 @@ function CartProduct({ data, index, setData }) {
       >
         <div
           style={{
-            height: "100px",
+            height: "120px",
             padding: "10px",
             display: "flex",
             justifyContent: "center",
@@ -98,19 +94,6 @@ function CartProduct({ data, index, setData }) {
             ₹40
           </span>
         </p>
-        {data.specs?.map((ele) => {
-          if (ele.title === "General") {
-            return ele.details?.map((item) => {
-              if (item.property === "Color") {
-                return (
-                  <p style={{ color: "grey", fontSize: "14px" }}>
-                    {item.value}
-                  </p>
-                );
-              }
-            });
-          }
-        })}
         <div
           style={{
             display: "flex",
@@ -133,7 +116,7 @@ function CartProduct({ data, index, setData }) {
             display: "flex",
             alignItems: "baseline",
             gap: "10px",
-            marginTop: "10px",
+            marginTop: "20px",
           }}
         >
           <p
@@ -163,15 +146,69 @@ function CartProduct({ data, index, setData }) {
             ></i>
           </div>
         </div>
-        <div className="remove_btn_div" style={{ marginTop: "10px" }}>
-          <button>SAVE FOR LATER</button>
+        <div className="remove_btn_div" style={{ marginTop: "20px" }}>
           <button
             onClick={() => {
-              removeFromCart(data._id);
+              movetosave(data._id, setData, setSavedData);
             }}
           >
-            REMOVE
+            SAVE FOR LATER
           </button>
+          <button onClick={onOpen}>REMOVE</button>
+        </div>
+        <div>
+          <AlertDialog
+            motionPreset="slideInBottom"
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+            isOpen={isOpen}
+            isCentered
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Remove Item
+                </AlertDialogHeader>
+
+                <AlertDialogBody style={{ color: "grey" }}>
+                  Are you sure you want to remove this item?
+                </AlertDialogBody>
+
+                <AlertDialogFooter
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2,1fr)",
+                    gap: "30px",
+                    marginTop: "20px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <button
+                    ref={cancelRef}
+                    onClick={onClose}
+                    style={{ border: "1px solid grey", padding: "10px" }}
+                  >
+                    CANCEL
+                  </button>
+                  <button
+                    style={{
+                      backgroundColor: "#2874f0",
+                      color: "white",
+                      padding: "10px",
+                      border: "1px solid #2874f0",
+                    }}
+                    onClick={() => {
+                      removeFromCart(data._id, data, setData, toast);
+                      onClose();
+                    }}
+                    ml={3}
+                  >
+                    REMOVE
+                  </button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
         </div>
       </div>
     </div>

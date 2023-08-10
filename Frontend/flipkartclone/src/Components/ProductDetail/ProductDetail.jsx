@@ -57,7 +57,7 @@ function ProductDetail() {
       });
       setData(filterData[0]);
     });
-  }, []);
+  }, [productId]);
   console.log(data);
 
   const handleCart = () => {
