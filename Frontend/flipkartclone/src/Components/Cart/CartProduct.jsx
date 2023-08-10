@@ -1,9 +1,30 @@
 import "./CartProduct.css";
 import { useState } from "react";
 import { delivery } from "../../constant/data";
+import { getCartItem } from "../../Redux/action";
 
-function CartProduct({ data, index }) {
+function CartProduct({ data, index, setData }) {
   const [quantity, setQuantity] = useState(1);
+  const removeFromCart = (id) => {
+    fetch(`http://localhost:7000/addtocart/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        alert(res.message);
+        getCartItem(setData);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Something went wrong");
+      });
+  };
   return (
     <div className="cart_product_page">
       <div
@@ -15,16 +36,57 @@ function CartProduct({ data, index }) {
       >
         <div
           style={{
-            height: "120px",
+            height: "100px",
             padding: "10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <img src={data.thumbnails} alt="" style={{ height: "100%" }} />
         </div>
         <div className="quantity_btn">
-          <button className="inc_dec_btn">-</button>
+          <button
+            className="inc_dec_btn"
+            style={
+              quantity === 1
+                ? {
+                    color: "rgb(187, 187, 187)",
+                    border: "1px solid rgb(187, 187, 187)",
+                    cursor: "no-drop",
+                  }
+                : {
+                    color: "black",
+                  }
+            }
+            onClick={() => {
+              setQuantity(quantity - 1);
+            }}
+            disabled={quantity === 1}
+          >
+            -
+          </button>
           <button className="display_quantity">{quantity}</button>
-          <button className="inc_dec_btn">+</button>
+          <button
+            className="inc_dec_btn"
+            style={
+              quantity === 10
+                ? {
+                    color: "rgb(187, 187, 187)",
+                    border: "1px solid rgb(187, 187, 187)",
+                    cursor: "no-drop",
+                  }
+                : {
+                    color: "black",
+                  }
+            }
+            onClick={() => {
+              setQuantity(quantity + 1);
+            }}
+            disabled={quantity === 10}
+          >
+            +
+          </button>
         </div>
       </div>
       <div>
@@ -66,7 +128,14 @@ function CartProduct({ data, index }) {
             alt=""
           />
         </div>
-        <div style={{ display: "flex", alignItems: "baseline", gap: "10px",marginTop:"10px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            gap: "10px",
+            marginTop: "10px",
+          }}
+        >
           <p
             style={{
               textDecoration: "line-through",
@@ -94,9 +163,15 @@ function CartProduct({ data, index }) {
             ></i>
           </div>
         </div>
-        <div className="remove_btn_div" style={{marginTop:"10px" }}>
+        <div className="remove_btn_div" style={{ marginTop: "10px" }}>
           <button>SAVE FOR LATER</button>
-          <button>REMOVE</button>
+          <button
+            onClick={() => {
+              removeFromCart(data._id);
+            }}
+          >
+            REMOVE
+          </button>
         </div>
       </div>
     </div>

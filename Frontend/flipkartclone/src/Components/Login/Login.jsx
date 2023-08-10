@@ -30,6 +30,7 @@ function Login({ onClose }) {
           if (res.data.message === "Login Successful") {
             let username = loginData.email.split('@')[0].toLocaleUpperCase();
             console.log(username);
+            localStorage.setItem('username',username);
             dispatch({type:"USERNAME",payload:username})
             toast({
               title: `${res.data.message}`,

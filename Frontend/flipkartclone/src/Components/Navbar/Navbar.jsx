@@ -24,7 +24,7 @@ function Navbar() {
     navigate(`/product/${inputSearch}`)
   }
   const gotToCart = ()=>{
-    if(!localStorage.getItem("token")){
+    if(!localStorage.getItem('username')){
       alert("Please Login")
     }else{
       navigate("/cart")
@@ -83,7 +83,7 @@ function Navbar() {
           </button>
         </form>
         <div className="dropdown">
-          {!username ? (
+          {!localStorage.getItem('username') ? (
             <button className="dropbtn">Login</button>
           ) : (
             <p
@@ -98,7 +98,7 @@ function Navbar() {
                 gap: "5px",
               }}
             >
-              {username}{" "}
+              {localStorage.getItem('username')}
               <i
                 style={{ fontSize: "10px" }}
                 className="fa-solid fa-chevron-down"
@@ -108,7 +108,7 @@ function Navbar() {
           <div className="dropdown-content" style={{cursor:"pointer"}}>
             <div className="arrow-up"></div>
             <div className="contain">
-              {!username && (
+              {!localStorage.getItem('username') && (
                 <div className="firstDiv">
                   <p style={{ fontWeight: "600", fontSize: "15px" }}>
                     New Customer?
@@ -167,11 +167,13 @@ function Navbar() {
                 <i className="fa-solid fa-rug"></i>
                 <p>Gift Cards</p>
               </div>
-              {username && (
+              {localStorage.getItem('username') && (
                 <div
                   onClick={() => {
                     localStorage.removeItem("token");
+                    localStorage.removeItem("username");
                     dispatch({type:"USERNAME",payload:""})
+                    navigate("/")
                   }}
                 >
                   <i class="fa-solid fa-arrow-right-from-bracket"></i>

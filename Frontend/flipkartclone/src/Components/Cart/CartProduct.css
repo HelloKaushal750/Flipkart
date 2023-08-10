@@ -32,9 +32,8 @@
 }
 .remove_btn_div > button {
   font-size: 15px;
-  font-weight: 600;
   color: rgb(61, 61, 61);
-  font: small-caps bold sans-serif;
+  font-weight: 600;
 }
 .remove_btn_div > button:hover {
   color: #2874f0;

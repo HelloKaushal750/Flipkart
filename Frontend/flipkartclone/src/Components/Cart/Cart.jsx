@@ -2,6 +2,8 @@ import "./Cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import CartProduct from "./CartProduct";
+import Empty from "./Empty";
+import { getCartItem } from "../../Redux/action";
 
 const style1 = {
   color: "#2874f0",
@@ -20,24 +22,7 @@ function Cart() {
     return state.isGrocery;
   });
   useEffect(() => {
-    fetch("http://localhost:7000/addtocart", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-        setData(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Something went wrong");
-      });
+    getCartItem(setData);
   }, []);
   return (
     <div style={{ backgroundColor: "#f1f3f6", padding: "15px 0" }}>
@@ -83,17 +68,23 @@ function Cart() {
               Enter Delivery Pincode
             </button>
           </div>
-          {data.length > 0 ? (
-            <div style={{backgroundColor:"white"}}>
-              {data?.map((ele,i) => {
-                return <CartProduct data={ele} index={i} key={i} />;
-              })}
-            </div>
+          {!isGrocery ? (
+            data.length>0 ? (
+              <div style={{ backgroundColor: "white" }}>
+                {data?.map((ele, i) => {
+                  return <CartProduct data={ele} index={i} key={i} setData={setData} />;
+                })}
+              </div>
+            ) : (
+              <Empty />
+            )
           ) : (
-            <div></div>
+            <Empty />
           )}
         </div>
-        <div className="right_cart"></div>
+        {
+          data.length>0 && <div className="right_cart"></div>
+        }
       </div>
     </div>
   );
