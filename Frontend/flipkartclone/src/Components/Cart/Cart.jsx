@@ -84,6 +84,7 @@ function Cart() {
                         key={i}
                         setData={setData}
                         setSavedData={setSavedData}
+                        btnheading={'SAVE FOR LATER'}
                       />
                     );
                   })}
@@ -108,6 +109,7 @@ function Cart() {
                     key={i}
                     setData={setData}
                     setSavedData={setSavedData}
+                    btnheading={'MOVE TO CART'}
                   />
                 );
               })}
