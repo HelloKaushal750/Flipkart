@@ -12,10 +12,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
-import { removeFromCart } from "../../Redux/action";
-import { movetosave } from "../../Redux/action";
+import { removeFromSaved } from "../../Redux/action";
+import { movetocart } from "../../Redux/action";
 
-function CartProduct({ data, index, setData, setSavedData, btnheading }) {
+function SavedItem({ data, index, setData, setSavedData, btnheading }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const toast = useToast();
@@ -149,7 +149,7 @@ function CartProduct({ data, index, setData, setSavedData, btnheading }) {
         <div className="remove_btn_div" style={{ marginTop: "20px" }}>
           <button
             onClick={() => {
-              movetosave(data._id, setData, setSavedData,toast,data.name);
+                movetocart(data._id, setData, setSavedData,toast,data.name);
             }}
           >
             {btnheading}
@@ -198,7 +198,7 @@ function CartProduct({ data, index, setData, setSavedData, btnheading }) {
                       border: "1px solid #2874f0",
                     }}
                     onClick={() => {
-                      removeFromCart(data._id, data, setData, toast);
+                      removeFromSaved(data._id, data, setSavedData, toast);
                       onClose();
                     }}
                     ml={3}
@@ -215,4 +215,4 @@ function CartProduct({ data, index, setData, setSavedData, btnheading }) {
   );
 }
 
-export default CartProduct;
+export default SavedItem;

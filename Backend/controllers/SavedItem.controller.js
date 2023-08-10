@@ -118,4 +118,21 @@ SavedItemController.delete("/:movetocartid", async (req, res) => {
   }
 });
 
+SavedItemController.delete("/removeitem/:savedId", async (req, res) => {
+  try {
+    const { savedId } = req.params;
+    const deletedItem = await SavedItemModel.findOneAndDelete({
+      _id: savedId,
+      userId: req.body.userId,
+    });
+    if (deletedItem) {
+      res.status(200).json({ message: "Item Deleted Successfully" });
+    } else {
+      res.status(200).json({ message: "No Item found!" });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+});
+
 module.exports = { SavedItemController };

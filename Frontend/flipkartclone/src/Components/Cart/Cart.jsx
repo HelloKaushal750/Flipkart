@@ -5,6 +5,7 @@ import CartProduct from "./CartProduct";
 import Empty from "./Empty";
 import { getCartItem } from "../../Redux/action";
 import { getSavedItem } from "../../Redux/action";
+import SavedItem from "./SavedItem";
 
 const style1 = {
   color: "#2874f0",
@@ -31,7 +32,7 @@ function Cart() {
   return (
     <div style={{ backgroundColor: "#f1f3f6", padding: "15px 0" }}>
       <div className="cart_page">
-        <div style={{display:'flex',flexDirection:'column',gap:'20px'}}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div className="left_cart">
             <div className="cart_option">
               <button
@@ -84,7 +85,7 @@ function Cart() {
                         key={i}
                         setData={setData}
                         setSavedData={setSavedData}
-                        btnheading={'SAVE FOR LATER'}
+                        btnheading={"SAVE FOR LATER"}
                       />
                     );
                   })}
@@ -96,25 +97,36 @@ function Cart() {
               <Empty />
             )}
           </div>
-          <div>
-            <div style={{backgroundColor:'white',padding:"15px 20px"}}>
-              <h1 style={{fontWeight:'600',fontSize:"15px"}}>Saved For Later {savedData.length>0 && `(${savedData.length})`}</h1>
+          {savedData.length>0 && (
+            <div
+              style={{
+                boxShadow:
+                  "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+                borderRadius: "5px",
+              }}
+            >
+              <div style={{ backgroundColor: "white", padding: "15px 20px" }}>
+                <h1 style={{ fontWeight: "600", fontSize: "15px" }}>
+                  Saved For Later{" "}
+                  {savedData.length > 0 && `(${savedData.length})`}
+                </h1>
+              </div>
+              <div style={{ backgroundColor: "white" }}>
+                {savedData?.map((ele, i) => {
+                  return (
+                    <SavedItem
+                      data={ele}
+                      index={i}
+                      key={i}
+                      setData={setData}
+                      setSavedData={setSavedData}
+                      btnheading={"MOVE TO CART"}
+                    />
+                  );
+                })}
+              </div>
             </div>
-            <div style={{ backgroundColor: "white" }}>
-              {savedData?.map((ele, i) => {
-                return (
-                  <CartProduct
-                    data={ele}
-                    index={i}
-                    key={i}
-                    setData={setData}
-                    setSavedData={setSavedData}
-                    btnheading={'MOVE TO CART'}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          )}
         </div>
         {data.length > 0 && <div className="right_cart"></div>}
       </div>
