@@ -20,6 +20,11 @@ const style2 = {
 function Cart() {
   const [data, setData] = useState([]);
   const [savedData, setSavedData] = useState([]);
+  // const [price, setPrice] = useState({
+  //   originalPrice: data.original_price,
+  //   currentPrice: data.current_price,
+  //   quantity: data.quantity,
+  // });
   const dispatch = useDispatch();
   const isGrocery = useSelector((state) => {
     return state.isGrocery;
@@ -30,7 +35,13 @@ function Cart() {
   }, []);
   console.log(savedData);
   return (
-    <div style={{ backgroundColor: "#f1f3f6", padding: "15px 0",paddingBottom:"100px" }}>
+    <div
+      style={{
+        backgroundColor: "#f1f3f6",
+        padding: "15px 0",
+        paddingBottom: "100px",
+      }}
+    >
       <div className="cart_page">
         <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
           <div className="left_cart">
@@ -97,7 +108,7 @@ function Cart() {
               <Empty />
             )}
           </div>
-          {savedData.length>0 && (
+          {savedData.length > 0 && (
             <div
               style={{
                 boxShadow:
@@ -128,7 +139,81 @@ function Cart() {
             </div>
           )}
         </div>
-        {data.length > 0 && <div className="right_cart"></div>}
+        {data.length > 0 && (
+          <div>
+            <div className="right_cart">
+              <div
+                style={{
+                  padding: "15px 20px",
+                  fontWeight: "600",
+                  color: "grey",
+                  borderBottom: "1px solid rgb(229, 229, 229)",
+                }}
+              >
+                <h1>PRICE DETAILS</h1>
+              </div>
+              <div style={{ padding: "20px" }}>
+                <div
+                  className="price_cart"
+                  style={{ borderBottom: "1px solid rgb(229, 229, 229)" }}
+                >
+                  <div>
+                    <h2>Price</h2>
+                    <p>₹8000</p>
+                  </div>
+                  <div>
+                    <h2>Discount</h2>
+                    <p style={{ color: "green" }}>- ₹2000</p>
+                  </div>
+                  <div>
+                    <h2>Delivery Charges</h2>
+                    <p style={{ color: "green" }}>Free</p>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    borderBottom: "1px solid rgb(229, 229, 229)",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "20px 0",
+                    fontWeight: "600",
+                  }}
+                >
+                  <h1 style={{ fontSize: "17px" }}>Total Amount</h1>
+                  <h2 style={{ fontSize: "17px" }}>₹6000</h2>
+                </div>
+              </div>
+              <h3
+                style={{
+                  padding: "0 20px",
+                  color: "green",
+                  fontWeight: "600",
+                  marginTop: "-10px",
+                }}
+              >
+                You will save ₹2000 on this order
+              </h3>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                padding: "15px",
+                marginTop: "10px",
+                alignItems: "center",
+                color: "grey",
+              }}
+            >
+              <i
+                class="fa-solid fa-shield-halved"
+                style={{ fontSize: "25px" }}
+              ></i>
+              <p style={{ fontSize: "14px", color: "grey", fontWeight: "600" }}>
+                Safe and Secure Payments.Easy returns.100% Authentic products.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

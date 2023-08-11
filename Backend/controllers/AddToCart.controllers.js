@@ -22,7 +22,6 @@ CartController.get("/", async (req, res) => {
   try {
     const userId = req.body.userId;
     const cartItem = await CartModel.find({ userId });
-    console.log(cartItem);
     res.status(200).json(cartItem);
   } catch (error) {
     res.status(404).res({ message: error });
