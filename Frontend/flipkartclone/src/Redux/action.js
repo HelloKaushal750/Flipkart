@@ -91,7 +91,6 @@ export const cartQuantity = (
       return res.json();
     })
     .then((res) => {
-      console.log(res);
       getCartItem(setData);
     })
     .catch((err) => {
@@ -200,4 +199,38 @@ export const savedQuantity = (
       console.log(err);
       alert("Something went wrong");
     });
+};
+
+export const calculation = (data,setPrice,dispatch) => {
+  let originalP = data?.reduce((acc, item) => {
+    return (
+      Number(acc.original_price * acc.quantity) +
+      Number(item.original_price * item.quantity)
+    );
+  });
+  let discountP = data?.reduce((acc, item) => {
+    return (
+      Number((acc.original_price - acc.current_price) * acc.quantity) +
+      Number((item.original_price - item.current_price) * item.quantity)
+    );
+  });
+  let currentP = data?.reduce((acc, item) => {
+    return (
+      Number(acc.current_price * acc.quantity) +
+      Number(item.current_price * item.quantity)
+    );
+  });
+  setPrice({
+    originalPrice: originalP,
+    discountPrice: discountP,
+    currentPrice: currentP,
+  });
+  dispatch({
+    type: "ITEMPRICE",
+    payload: {
+      originalPrice: originalP,
+      discountPrice: discountP,
+      currentPrice: currentP,
+    },
+  });
 };

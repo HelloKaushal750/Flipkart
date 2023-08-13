@@ -3,6 +3,7 @@ const initialState = {
   loggedInUser: "",
   isHomePage: false,
   isGrocery: false,
+  itemprice: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,6 +19,9 @@ const reducer = (state = initialState, action) => {
     }
     case "GROCERYPAGE": {
       return { ...state, isGrocery: action.payload };
+    }
+    case "ITEMPRICE": {
+      return { ...state, itemprice: action.payload };
     }
     default: {
       return state;
