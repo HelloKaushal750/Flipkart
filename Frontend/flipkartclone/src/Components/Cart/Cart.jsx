@@ -29,7 +29,6 @@ function Cart() {
     getCartItem(setData);
     getSavedItem(setSavedData);
   }, []);
-  
 
   return (
     <div
@@ -104,6 +103,31 @@ function Cart() {
             ) : (
               <Empty />
             )}
+            <div
+              style={{
+                boxShadow:
+                  "rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px",
+                backgroundColor: "white",
+                marginTop: "-17px",
+                padding: "15px 20px",
+                display: "flex",
+                justifyContent: "right",
+              }}
+            >
+              <button
+                style={{
+                  width: "30%",
+                  backgroundColor: "#fb641b",
+                  padding: "14px",
+                  color: "white",
+                  borderRadius: "2px",
+                  fontSize: "15px",
+                  cursor:'pointer'
+                }}
+              >
+                PLACE ORDER
+              </button>
+            </div>
           </div>
           {savedData.length > 0 && (
             <div
@@ -136,9 +160,7 @@ function Cart() {
             </div>
           )}
         </div>
-        {data.length > 0 && (
-          <CartRight data={data} setData={setData} />
-        )}
+        {data.length > 0 && <CartRight data={data} setData={setData} />}
       </div>
     </div>
   );
