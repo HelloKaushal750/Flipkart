@@ -1,6 +1,18 @@
 import "./Booked.css";
+import React, { useEffect } from "react";
+import BookedItem from "./BookedItem";
+import { getCartItem } from "../../Redux/action";
+import { useState } from "react";
 
 function Booked() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getCartItem(setData);
+  }, []);
+  console.log(data);
+
+
   return (
     <div
       style={{
@@ -66,6 +78,101 @@ function Booked() {
                 CHANGE
               </button>
             </div>
+          </div>
+          <div
+            style={{
+              backgroundColor: "white",
+              padding: "15px 20px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ display: "flex", gap: "20px" }}>
+              <div>
+                <button
+                  style={{
+                    backgroundColor: "rgb(232, 230, 230)",
+                    padding: "2px 7px",
+                    fontSize: "12px",
+                    color: "#2874f0",
+                    fontWeight: "600",
+                  }}
+                >
+                  2
+                </button>
+              </div>
+              <div>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <h1 style={{ color: "grey", fontWeight: "600" }}>
+                    DELIVERY ADDRESS
+                  </h1>
+                  <i class="fa-solid fa-check" style={{ color: "#2874f0" }}></i>
+                </div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    marginTop: "2px",
+                  }}
+                >
+                  <h3 style={{ fontWeight: "600" }}>Kaushal Vishwakarma</h3>
+                  <p>
+                    B46, Sevanand Chawl, Near Mahalaxmi Hotel, Karanti Nagar,
+                    Akurli Road, Kandivali East, Mumbai, Maharashtra - 400101
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                style={{
+                  color: "#2874f0",
+                  width: "120px",
+                  border: "1px solid rgb(229, 229, 229)",
+                  padding: "8px",
+                  fontSize: "14px",
+                }}
+              >
+                CHANGE
+              </button>
+            </div>
+          </div>
+          <div
+            style={{
+              backgroundColor: "#2874f0",
+              padding: "15px 20px",
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}
+          >
+            <div>
+              <button
+                style={{
+                  backgroundColor: "rgb(232, 230, 230)",
+                  padding: "2px 7px",
+                  fontSize: "12px",
+                  color: "#2874f0",
+                  fontWeight: "600",
+                }}
+              >
+                3
+              </button>
+            </div>
+
+            <div style={{ display: "flex", gap: "10px" }}>
+              <h1 style={{ color: "white", fontWeight: "600" }}>
+                ORDER SUMMARY
+              </h1>
+              <i class="fa-solid fa-check" style={{ color: "#2874f0" }}></i>
+            </div>
+          </div>
+
+          <div style={{ backgroundColor: "white" }}>
+            {/* {item?.map((ele, index) => {
+              return <BookedItem data={data} index={index} setData={setData} />;
+            })} */}
           </div>
         </div>
         <div>

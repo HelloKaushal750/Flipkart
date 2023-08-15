@@ -1,6 +1,3 @@
-import "./CartProduct.css";
-import { useEffect, useState } from "react";
-import { delivery } from "../../constant/data";
 import React from "react";
 import {
   AlertDialog,
@@ -11,22 +8,13 @@ import {
   AlertDialogOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useToast } from "@chakra-ui/react";
-import { removeFromSaved } from "../../Redux/action";
-import { movetocart } from "../../Redux/action";
-import { savedQuantity } from "../../Redux/action";
-import { useDispatch } from "react-redux";
+import { delivery } from "../../constant/data";
+import { useState } from "react";
 
-function SavedItem({ data, index, setData, setSavedData, btnheading }) {
+function BookedItem({ data, index, setData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  const toast = useToast();
   const [quantity, setQuantity] = useState(data.quantity);
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    savedQuantity(data._id, quantity, toast, data.name, setSavedData, setQuantity);
-  }, [quantity]);
 
   return (
     <div className="cart_product_page">
@@ -97,7 +85,12 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
         <p style={{ fontSize: "14px" }}>
           {delivery[index] ? delivery[index] : "Delivery by Sun Aug 20"} |{" "}
           <span style={{ color: "green" }}>Free</span>{" "}
-          <span style={{ textDecoration: "line-through", color: "grey" }}>
+          <span
+            style={{
+              textDecoration: "line-through",
+              color: "grey",
+            }}
+          >
             ₹40
           </span>
         </p>
@@ -110,7 +103,7 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
           }}
         >
           <p style={{ fontSize: "14px", color: "grey" }}>
-            Seller: {data.seller.seller_name}
+            {/* Seller: {data.seller.seller_name} */}
           </p>
           <img
             src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png"
@@ -133,15 +126,21 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
               fontSize: "14px",
             }}
           >
-            ₹{data.original_price*data.quantity}
+            ₹{data.original_price * data.quantity}
           </p>
           <h3 style={{ fontSize: "18px", fontWeight: "600" }}>
-            ₹{data.current_price*data.quantity}
+            ₹{data.current_price * data.quantity}
           </h3>
           <p style={{ color: "green", fontSize: "14px" }}>
             {data.discount_percent}% Off
           </p>
-          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
             {data.offers.length > 0 && (
               <p style={{ color: "green", fontSize: "14px" }}>
                 {data.offers.length} offers applied
@@ -154,13 +153,6 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
           </div>
         </div>
         <div className="remove_btn_div" style={{ marginTop: "20px" }}>
-          <button
-            onClick={() => {
-              movetocart(data._id, setData, setSavedData, toast, data.name, dispatch);
-            }}
-          >
-            {btnheading}
-          </button>
           <button onClick={onOpen}>REMOVE</button>
         </div>
         <div>
@@ -193,7 +185,10 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
                   <button
                     ref={cancelRef}
                     onClick={onClose}
-                    style={{ border: "1px solid grey", padding: "10px" }}
+                    style={{
+                      border: "1px solid grey",
+                      padding: "10px",
+                    }}
                   >
                     CANCEL
                   </button>
@@ -204,10 +199,10 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
                       padding: "10px",
                       border: "1px solid #2874f0",
                     }}
-                    onClick={() => {
-                      removeFromSaved(data._id, data, setSavedData, toast, dispatch);
-                      onClose();
-                    }}
+                    // onClick={() => {
+                    //   removeFromCart(data._id, data, setData, toast);
+                    //   onClose();
+                    // }}
                     ml={3}
                   >
                     REMOVE
@@ -222,4 +217,4 @@ function SavedItem({ data, index, setData, setSavedData, btnheading }) {
   );
 }
 
-export default SavedItem;
+export default BookedItem;

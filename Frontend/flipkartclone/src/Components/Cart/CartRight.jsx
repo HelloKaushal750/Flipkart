@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { getCartItem } from "../../Redux/action";
 import { useDispatch } from "react-redux";
-import { calculation } from "../../Redux/action";
+
 
 function CartRight({ data, setData }) {
   const dispatch = useDispatch();

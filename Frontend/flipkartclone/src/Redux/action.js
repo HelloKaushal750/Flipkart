@@ -1,4 +1,4 @@
-export const getCartItem = (setData) => {
+export const getCartItem = (setData,dispatch) => {
   fetch("http://localhost:7000/addtocart", {
     method: "GET",
     headers: {
@@ -18,7 +18,7 @@ export const getCartItem = (setData) => {
     });
 };
 
-export const removeFromCart = (id, data, setData, toast) => {
+export const removeFromCart = (id, data, setData, toast,dispatch) => {
   fetch(`http://localhost:7000/addtocart/${id}`, {
     method: "DELETE",
     headers: {
@@ -36,7 +36,7 @@ export const removeFromCart = (id, data, setData, toast) => {
         duration: 3000,
         isClosable: true,
       });
-      getCartItem(setData);
+      getCartItem(setData,dispatch);
     })
     .catch((err) => {
       console.log(err);
@@ -44,7 +44,7 @@ export const removeFromCart = (id, data, setData, toast) => {
     });
 };
 
-export const movetosave = (id, setData, setSavedData, toast, name) => {
+export const movetosave = (id, setData, setSavedData, toast, name,dispatch) => {
   fetch(`http://localhost:7000/saveditem/${id}`, {
     method: "POST",
     headers: {
@@ -62,7 +62,7 @@ export const movetosave = (id, setData, setSavedData, toast, name) => {
         duration: 2000,
         isClosable: true,
       });
-      getCartItem(setData);
+      getCartItem(setData,dispatch);
       getSavedItem(setSavedData);
     })
     .catch((err) => {
@@ -77,7 +77,8 @@ export const cartQuantity = (
   toast,
   name,
   setData,
-  setQuantity
+  setQuantity,
+  dispatch
 ) => {
   fetch(`http://localhost:7000/addtocart/qty/${savedId}`, {
     method: "PATCH",
@@ -91,7 +92,7 @@ export const cartQuantity = (
       return res.json();
     })
     .then((res) => {
-      getCartItem(setData);
+      getCartItem(setData,dispatch);
     })
     .catch((err) => {
       console.log(err);
@@ -119,7 +120,7 @@ export const getSavedItem = (setSavedData) => {
     });
 };
 
-export const movetocart = (id, setData, setSavedData, toast, name) => {
+export const movetocart = (id, setData, setSavedData, toast, name,dispatch) => {
   fetch(`http://localhost:7000/saveditem/${id}`, {
     method: "DELETE",
     headers: {
@@ -137,7 +138,7 @@ export const movetocart = (id, setData, setSavedData, toast, name) => {
         duration: 2000,
         isClosable: true,
       });
-      getCartItem(setData);
+      getCartItem(setData,dispatch);
       getSavedItem(setSavedData);
     })
     .catch((err) => {

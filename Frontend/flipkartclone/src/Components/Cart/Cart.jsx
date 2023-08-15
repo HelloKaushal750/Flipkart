@@ -105,7 +105,7 @@ function Cart() {
             ) : (
               <Empty />
             )}
-            {!isGrocery && (
+            {data.length!==0 && !isGrocery && (
               <div
                 style={{
                   boxShadow:
