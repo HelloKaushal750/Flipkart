@@ -7,6 +7,7 @@ import { getCartItem } from "../../Redux/action";
 import { getSavedItem } from "../../Redux/action";
 import SavedItem from "./SavedItem";
 import CartRight from "./CartRight";
+import { useNavigate } from "react-router-dom";
 
 const style1 = {
   color: "#2874f0",
@@ -19,6 +20,7 @@ const style2 = {
 };
 
 function Cart() {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [savedData, setSavedData] = useState([]);
   const dispatch = useDispatch();
@@ -103,31 +105,34 @@ function Cart() {
             ) : (
               <Empty />
             )}
-            <div
-              style={{
-                boxShadow:
-                  "rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px",
-                backgroundColor: "white",
-                marginTop: "-17px",
-                padding: "15px 20px",
-                display: "flex",
-                justifyContent: "right",
-              }}
-            >
-              <button
+            {!isGrocery && (
+              <div
                 style={{
-                  width: "30%",
-                  backgroundColor: "#fb641b",
-                  padding: "14px",
-                  color: "white",
-                  borderRadius: "2px",
-                  fontSize: "15px",
-                  cursor:'pointer'
+                  boxShadow:
+                    "rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px",
+                  backgroundColor: "white",
+                  marginTop: "-17px",
+                  padding: "15px 20px",
+                  display: "flex",
+                  justifyContent: "right",
                 }}
               >
-                PLACE ORDER
-              </button>
-            </div>
+                <button
+                  style={{
+                    width: "30%",
+                    backgroundColor: "#fb641b",
+                    padding: "14px",
+                    color: "white",
+                    borderRadius: "2px",
+                    fontSize: "15px",
+                    cursor: "pointer",
+                  }}
+                  onClick={()=>{navigate('/bookingpage')}}
+                >
+                  PLACE ORDER
+                </button>
+              </div>
+            )}
           </div>
           {savedData.length > 0 && (
             <div

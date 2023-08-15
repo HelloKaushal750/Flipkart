@@ -1,0 +1,11 @@
+.booked_page{
+    width: 85%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    gap:15px;
+}
+.right_booked{
+    background-color: white;
+    padding-bottom: 15px;
+}

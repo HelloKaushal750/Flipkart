@@ -59,7 +59,7 @@ function CartRight({ data, setData }) {
             style={{ borderBottom: "1px solid rgb(229, 229, 229)" }}
           >
             <div>
-              <h2>Price</h2>
+              <h2>Price ({data.length} items)</h2>
               <p>₹{price.originalPrice}</p>
             </div>
             <div>

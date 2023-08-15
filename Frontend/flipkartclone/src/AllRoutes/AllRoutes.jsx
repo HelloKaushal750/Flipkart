@@ -3,6 +3,7 @@ import Home from "../Components/Home/Home";
 import Product from "../Components/Product/Product";
 import ProductDetail from "../Components/ProductDetail/ProductDetail";
 import Cart from "../Components/Cart/Cart";
+import Booked from "../Components/Booked/Booked";
 
 function AllRoutes(){
     return <Routes>
@@ -11,6 +12,7 @@ function AllRoutes(){
         <Route path="/product/:features" element={<Product />} />
         <Route path="/:productId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/bookingpage" element={<Booked />} />
     </Routes>
 }
 
