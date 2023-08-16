@@ -1,0 +1,9 @@
+.payment_page{
+    background-color: white;
+    margin-top: -20px;
+    font-size: 14px;
+}
+.payment_page>div{
+    padding: 20px 25px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+}

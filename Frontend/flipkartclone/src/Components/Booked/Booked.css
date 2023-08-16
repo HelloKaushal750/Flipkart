@@ -1,16 +1,66 @@
-.booked_page{
-    width: 85%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 70% 30%;
-    gap:15px;
+.booked_page {
+  width: 85%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 15px;
 }
-.left_booked{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.left_booked {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.right_booked{
-    background-color: white;
-    padding-bottom: 15px;
+.right_booked {
+  background-color: white;
+  padding-bottom: 15px;
+}
+.input-container3 {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+  margin-top: -10px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 6px;
+  border: none;
+  border-bottom: 1px solid #979797;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="text"]:hover {
+  border-bottom-color: #2874f0;
+}
+
+input[type="text"].has-content:focus + label,
+input[type="text"].has-content:hover + label {
+  top: -10px;
+  font-size: 12px;
+  color: #979797;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-bottom-color: #2874f0;
+  padding-left: 0px;
+}
+
+label {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #979797;
+  pointer-events: none;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+  margin-top: -2px;
+}
+
+label.has-content {
+  top: -10px;
+  font-size: 12px;
+  color: #979797;
 }

@@ -4,15 +4,22 @@ import BookedItem from "./BookedItem";
 import { getCartItem } from "../../Redux/action";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import Empty from "../Cart/Empty";
 import { useDispatch } from "react-redux";
+import Payment from "./Payment";
 
 function Booked() {
+  const [boolean, setBoolean] = useState(false);
+  const [boolean2, setBoolean2] = useState(false);
+
+  const [phoneNo, setPhoneNo] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const [addressNo, setAddressNo] = useState("");
+  const [address, setAddress] = useState("");
+
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
-  const isGrocery = useSelector((state) => {
-    return state.isGrocery;
-  });
+
   useEffect(() => {
     getCartItem(setData);
   }, []);
@@ -55,6 +62,30 @@ function Booked() {
       },
     });
   }, [data]);
+
+  const handlephone = () => {
+    if (phoneNo.length < 10) {
+      alert("Mobile Number is Invalid!");
+    } else {
+      setPhone(phoneNo);
+      setBoolean(true);
+    }
+  };
+
+  const handleaddress = () => {
+    setAddress(addressNo);
+    setBoolean2(true);
+  };
+
+  const handlepayment = () => {
+    if (!phone) {
+      alert("Please Enter Mobile Number");
+    } else if (!address) {
+      alert("Please Enter Delivery Address");
+    } else {
+      dispatch({ type: "PAYMENT", payload: true });
+    }
+  };
 
   return (
     <div
@@ -100,16 +131,50 @@ function Booked() {
                     display: "flex",
                     fontSize: "14px",
                     marginTop: "2px",
+                    flexDirection: "column",
                   }}
                 >
-                  <h3 style={{ fontWeight: "600" }}>Kaushal Vishwakarma</h3>
+                  <h3 style={{ fontWeight: "600" }}>
+                    Kaushal Vishwakarma{" "}
+                    {phone && (
+                      <span style={{ fontWeight: "400" }}>+91-{phone}</span>
+                    )}
+                  </h3>
                   &nbsp;
-                  <p>+91-8369515207</p>
+                  {!boolean && (
+                    <div style={{ display: "flex", gap: "20px" }}>
+                      <div className="input-container3">
+                        <input
+                          type="text"
+                          onChange={(event) => {
+                            setPhoneNo(event.target.value);
+                          }}
+                          className={phoneNo ? "has-content" : ""}
+                          maxLength={10}
+                        />
+                        <label
+                          htmlFor="myInput"
+                          className={phoneNo ? "has-content" : ""}
+                        >
+                          Enter Mobile Number
+                        </label>
+                      </div>
+                      <button
+                        style={{ color: "#2874f0" }}
+                        onClick={handlephone}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
             <div>
               <button
+                onClick={() => {
+                  setBoolean(false);
+                }}
                 style={{
                   color: "#2874f0",
                   width: "120px",
@@ -159,16 +224,43 @@ function Booked() {
                     marginTop: "2px",
                   }}
                 >
-                  <h3 style={{ fontWeight: "600" }}>Kaushal Vishwakarma</h3>
-                  <p>
-                    B46, Sevanand Chawl, Near Mahalaxmi Hotel, Karanti Nagar,
-                    Akurli Road, Kandivali East, Mumbai, Maharashtra - 400101
-                  </p>
+                  <h3 style={{ fontWeight: "600", marginBottom: "20px" }}>
+                    Kaushal Vishwakarma
+                  </h3>
+                  {boolean2 && <p>{address}</p>}
+                  {!boolean2 && (
+                    <div style={{ display: "flex", gap: "20px" }}>
+                      <div className="input-container3">
+                        <input
+                          type="text"
+                          onChange={(event) => {
+                            setAddressNo(event.target.value);
+                          }}
+                          className={addressNo ? "has-content" : ""}
+                        />
+                        <label
+                          htmlFor="myInput"
+                          className={addressNo ? "has-content" : ""}
+                        >
+                          Enter Address
+                        </label>
+                      </div>
+                      <button
+                        style={{ color: "#2874f0" }}
+                        onClick={handleaddress}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
             <div>
               <button
+                onClick={() => {
+                  setBoolean2(false);
+                }}
                 style={{
                   color: "#2874f0",
                   width: "120px",
@@ -251,7 +343,7 @@ function Booked() {
                       style={{ color: "#2874f0" }}
                     ></i>
                   </div>
-                  <div style={{fontWeight:"600",fontSize:"14px"}}>
+                  <div style={{ fontWeight: "600", fontSize: "14px" }}>
                     {data.length} Items
                   </div>
                 </div>
@@ -284,17 +376,26 @@ function Booked() {
             </div>
           )}
           <div
-            onClick={() => {
-              dispatch({ type: "PAYMENT", payload: true });
-            }}
-            style={{
-              backgroundColor: "white",
-              padding: "15px 20px",
-              display: "flex",
-              alignItems: "center",
-              gap: "20px",
-              cursor: "pointer",
-            }}
+            onClick={handlepayment}
+            style={
+              !isPayment
+                ? {
+                    backgroundColor: "white",
+                    padding: "15px 20px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "20px",
+                    cursor: "pointer",
+                  }
+                : {
+                    backgroundColor: "#2874f0",
+                    padding: "15px 20px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "20px",
+                    cursor: "pointer",
+                  }
+            }
           >
             <div>
               <button
@@ -311,9 +412,18 @@ function Booked() {
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <h1 style={{ color: "grey", fontWeight: "600" }}>PAYMENT</h1>
+              <h1
+                style={
+                  !isPayment
+                    ? { color: "grey", fontWeight: "600" }
+                    : { color: "white", fontWeight: "600" }
+                }
+              >
+                PAYMENT
+              </h1>
             </div>
           </div>
+          {isPayment && <Payment />}
         </div>
         <div>
           <div className="right_booked">
