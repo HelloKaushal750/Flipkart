@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -8,16 +8,35 @@ import {
   AlertDialogOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { delivery } from "../../constant/data";
+import { delivery, delivery2 } from "../../constant/data";
 import { useState } from "react";
+import "./BookedItem.css";
+import { removeFromCart } from "../../Redux/action";
+import { useToast } from "@chakra-ui/react";
+import { cartQuantity } from "../../Redux/action";
+import { useDispatch } from "react-redux";
 
 function BookedItem({ data, index, setData }) {
+  const dispatch = useDispatch()
+  const [name, setName] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const [quantity, setQuantity] = useState(data.quantity);
+  const toast = useToast();
+  useEffect(() => {
+    if (data.name.length > 40) {
+      setName(data.name.substring(0, 40) + "...");
+    } else {
+      setName(data.name);
+    }
+  }, []);
+
+  useEffect(() => {
+    cartQuantity(data._id, quantity, toast, data.name, setData, setQuantity,dispatch);
+  }, [quantity]);
 
   return (
-    <div className="cart_product_page">
+    <div className="booked_product_page">
       <div
         style={{
           display: "flex",
@@ -81,19 +100,7 @@ function BookedItem({ data, index, setData }) {
         </div>
       </div>
       <div>
-        <h3 style={{ fontSize: "16px" }}>{data.name}</h3>
-        <p style={{ fontSize: "14px" }}>
-          {delivery[index] ? delivery[index] : "Delivery by Sun Aug 20"} |{" "}
-          <span style={{ color: "green" }}>Free</span>{" "}
-          <span
-            style={{
-              textDecoration: "line-through",
-              color: "grey",
-            }}
-          >
-            ₹40
-          </span>
-        </p>
+        <h3 style={{ fontSize: "16px" }}>{name}</h3>
         <div
           style={{
             display: "flex",
@@ -103,11 +110,11 @@ function BookedItem({ data, index, setData }) {
           }}
         >
           <p style={{ fontSize: "14px", color: "grey" }}>
-            {/* Seller: {data.seller.seller_name} */}
+            Seller: {data.seller.seller_name}
           </p>
           <img
             src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png"
-            style={{ width: "8%" }}
+            style={{ width: "14%" }}
             alt=""
           />
         </div>
@@ -152,7 +159,7 @@ function BookedItem({ data, index, setData }) {
             ></i>
           </div>
         </div>
-        <div className="remove_btn_div" style={{ marginTop: "20px" }}>
+        <div className="remove_btn_div" style={{ marginTop: "40px" }}>
           <button onClick={onOpen}>REMOVE</button>
         </div>
         <div>
@@ -199,10 +206,10 @@ function BookedItem({ data, index, setData }) {
                       padding: "10px",
                       border: "1px solid #2874f0",
                     }}
-                    // onClick={() => {
-                    //   removeFromCart(data._id, data, setData, toast);
-                    //   onClose();
-                    // }}
+                    onClick={() => {
+                      removeFromCart(data._id, data, setData, toast);
+                      onClose();
+                    }}
                     ml={3}
                   >
                     REMOVE
@@ -211,6 +218,42 @@ function BookedItem({ data, index, setData }) {
               </AlertDialogContent>
             </AlertDialogOverlay>
           </AlertDialog>
+        </div>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
+          <input type="radio" checked />
+          <div style={{fontSize:"14px"}}>
+            <p>
+              {delivery[index] ? delivery[index] : "Delivery by Sun Aug 20"} |{" "}
+            </p>
+            <span style={{ color: "green" }}>Free</span>{" "}
+            <span
+              style={{
+                textDecoration: "line-through",
+                color: "grey",
+              }}
+            >
+              ₹40
+            </span>
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
+          <input type="radio" />
+          <div style={{fontSize:"14px"}}>
+            <p>
+              {delivery2[index] ? delivery2[index] : "Delivery by Sun Aug 20"} |{" "}
+            </p>
+            <span style={{ color: "green" }}>Free</span>{" "}
+            <span
+              style={{
+                textDecoration: "line-through",
+                color: "grey",
+              }}
+            >
+              ₹70
+            </span>
+          </div>
         </div>
       </div>
     </div>

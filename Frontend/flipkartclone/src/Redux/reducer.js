@@ -4,7 +4,7 @@ const initialState = {
   isHomePage: false,
   isGrocery: false,
   itemprice: {},
-  cartItem: [],
+  isPayment: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,8 +24,8 @@ const reducer = (state = initialState, action) => {
     case "ITEMPRICE": {
       return { ...state, itemprice: action.payload };
     }
-    case "CARTITEM": {
-      return { ...state, cartItem: action.payload };
+    case "PAYMENT": {
+      return { ...state, isPayment: action.payload };
     }
     default: {
       return state;

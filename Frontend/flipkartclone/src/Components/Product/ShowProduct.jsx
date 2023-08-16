@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import './ShowProduct.css'
 
 function ShowProduct({ data }) {
   return (
@@ -88,7 +89,7 @@ function ShowProduct({ data }) {
                   }}
                 >
                   {item.highlights?.map((ele, i) => {
-                    return <li>{ele}</li>;
+                    return <li className="highlight_list">{ele}</li>;
                   })}
                 </ul>
               </div>

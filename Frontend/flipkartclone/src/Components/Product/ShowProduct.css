@@ -1,0 +1,8 @@
+.highlight_list::before {
+  content: "\2022";
+  color: #d7d7d7;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -15px;
+}

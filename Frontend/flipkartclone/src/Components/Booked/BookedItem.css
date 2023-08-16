@@ -1,0 +1,10 @@
+.booked_product_page {
+  display: grid;
+  grid-template-columns: 14% 50% 26%;
+  border-bottom: 1px solid rgb(229, 229, 229);
+  padding: 20px;
+  gap: 25px;
+}
+input[type="radio"] {
+  accent-color: #2874f0;
+}
