@@ -1,6 +1,8 @@
 import "./Payment.css";
 import { useSelector, useDispatch } from "react-redux";
 import Upi from "./UPI";
+import Credit from "./Credit";
+import Cash from "./Cash";
 
 function Payment({ price }) {
   const dispatch = useDispatch();
@@ -12,39 +14,8 @@ function Payment({ price }) {
   return (
     <div className="payment_page">
       <Upi price={price} />
-      <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
-        <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-          <input
-            type="radio"
-            name="payment"
-            value={paymentMode.credit}
-            onChange={(e) => {
-              dispatch({
-                type: "PAYMENTMODE",
-                payload: { upi: false, credit: e.target.checked, cash: false },
-              });
-            }}
-          />
-          <p>Credit / Debit / ATM Card</p>
-        </div>
-        <p style={{ color: "grey", marginLeft: "33px", marginTop: "-15px" }}>
-          Add and secure your card as per RBI guidelines
-        </p>
-      </div>
-      <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-        <input
-          type="radio"
-          name="payment"
-          value={paymentMode.cash}
-          onChange={(e) => {
-            dispatch({
-              type: "PAYMENTMODE",
-              payload: { upi: false, credit: false, cash: e.target.checked },
-            });
-          }}
-        />
-        <p>Cash on Delivery</p>
-      </div>
+      <Credit price={price} />
+      <Cash price={price} />
       <div
         style={{
           display: "flex",

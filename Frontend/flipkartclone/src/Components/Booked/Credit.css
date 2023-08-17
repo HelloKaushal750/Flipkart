@@ -1,0 +1,16 @@
+.credit_detail{
+    margin-left: 33px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.credit_detail input{
+    border: 1px solid grey;
+    padding: 15px;
+}
+.credit_detail input:focus{
+    border: none;
+    border: 1px solid #2874f0;
+    border-radius: 0;
+    outline: none;
+}
