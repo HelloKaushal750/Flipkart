@@ -14,13 +14,13 @@
   background-color: white;
   padding-bottom: 15px;
 }
-.input-container3 {
+.input-container6 {
   position: relative;
   width: 100%; /* Adjust as needed */
   margin-top: -10px;
 }
 
-input[type="text"] {
+.input-container6 input[type="text"] {
   width: 100%;
   padding: 6px;
   border: none;
@@ -28,26 +28,26 @@ input[type="text"] {
   transition: border-color 0.3s;
 }
 
-input[type="text"]:focus,
-input[type="text"]:hover {
+.input-container6 input[type="text"]:focus,
+.input-container6 input[type="text"]:hover {
   border-bottom-color: #2874f0;
 }
 
-input[type="text"].has-content:focus + label,
-input[type="text"].has-content:hover + label {
+.input-container6 input[type="text"].has-content:focus + label,
+.input-container6 input[type="text"].has-content:hover + label {
   top: -10px;
   font-size: 12px;
   color: #979797;
   transition: top 0.3s, font-size 0.3s, color 0.3s;
 }
 
-input[type="text"]:focus {
+.input-container6 input[type="text"]:focus {
   outline: none;
   border-bottom-color: #2874f0;
   padding-left: 0px;
 }
 
-label {
+.input-container6 label {
   position: absolute;
   top: 8px;
   left: 0;
@@ -59,7 +59,7 @@ label {
   margin-top: -2px;
 }
 
-label.has-content {
+.input-container6 label.has-content {
   top: -10px;
   font-size: 12px;
   color: #979797;

@@ -222,7 +222,7 @@ function BookedItem({ data, index, setData }) {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
-          <input type="radio" checked />
+          <input type="radio" name={data.name} checked />
           <div style={{fontSize:"14px"}}>
             <p>
               {delivery[index] ? delivery[index] : "Delivery by Sun Aug 20"} |{" "}
@@ -239,7 +239,7 @@ function BookedItem({ data, index, setData }) {
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
-          <input type="radio" />
+          <input type="radio" name={data.name}/>
           <div style={{fontSize:"14px"}}>
             <p>
               {delivery2[index] ? delivery2[index] : "Delivery by Sun Aug 20"} |{" "}

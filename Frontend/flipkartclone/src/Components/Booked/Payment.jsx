@@ -1,22 +1,30 @@
 import "./Payment.css";
+import { useSelector, useDispatch } from "react-redux";
+import Upi from "./UPI";
 
-function Payment() {
+function Payment({ price }) {
+  const dispatch = useDispatch();
+  const paymentMode = useSelector((state) => {
+    return state.paymentMode;
+  });
+  console.log(paymentMode);
+
   return (
     <div className="payment_page">
-      <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-        <input type="radio" name="payment" />
-        <div>
-          <img
-            src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/batman-returns/logos/UPI.gif"
-            alt=""
-            style={{ width: "25px" }}
-          />
-        </div>
-        <p>UPI</p>
-      </div>
+      <Upi price={price} />
       <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-          <input type="radio" name="payment" />
+          <input
+            type="radio"
+            name="payment"
+            value={paymentMode.credit}
+            onChange={(e) => {
+              dispatch({
+                type: "PAYMENTMODE",
+                payload: { upi: false, credit: e.target.checked, cash: false },
+              });
+            }}
+          />
           <p>Credit / Debit / ATM Card</p>
         </div>
         <p style={{ color: "grey", marginLeft: "33px", marginTop: "-15px" }}>
@@ -24,7 +32,17 @@ function Payment() {
         </p>
       </div>
       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-        <input type="radio" name="payment" />
+        <input
+          type="radio"
+          name="payment"
+          value={paymentMode.cash}
+          onChange={(e) => {
+            dispatch({
+              type: "PAYMENTMODE",
+              payload: { upi: false, credit: false, cash: e.target.checked },
+            });
+          }}
+        />
         <p>Cash on Delivery</p>
       </div>
       <div

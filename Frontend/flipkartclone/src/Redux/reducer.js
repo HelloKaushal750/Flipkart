@@ -5,6 +5,11 @@ const initialState = {
   isGrocery: false,
   itemprice: {},
   isPayment: false,
+  paymentMode: {
+    upi: false,
+    credit: false,
+    cash: false,
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +31,9 @@ const reducer = (state = initialState, action) => {
     }
     case "PAYMENT": {
       return { ...state, isPayment: action.payload };
+    }
+    case "PAYMENTMODE": {
+      return { ...state, paymentMode: action.payload };
     }
     default: {
       return state;

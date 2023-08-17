@@ -143,7 +143,7 @@ function Booked() {
                   &nbsp;
                   {!boolean && (
                     <div style={{ display: "flex", gap: "20px" }}>
-                      <div className="input-container3">
+                      <div className="input-container6">
                         <input
                           type="text"
                           onChange={(event) => {
@@ -230,7 +230,7 @@ function Booked() {
                   {boolean2 && <p>{address}</p>}
                   {!boolean2 && (
                     <div style={{ display: "flex", gap: "20px" }}>
-                      <div className="input-container3">
+                      <div className="input-container6">
                         <input
                           type="text"
                           onChange={(event) => {
@@ -423,7 +423,7 @@ function Booked() {
               </h1>
             </div>
           </div>
-          {isPayment && <Payment />}
+          {isPayment && <Payment price={price.currentPrice} />}
         </div>
         <div>
           <div className="right_booked">
