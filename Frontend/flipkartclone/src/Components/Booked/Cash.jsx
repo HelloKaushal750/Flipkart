@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Cash({ price }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const paymentMode = useSelector((state) => {
     return state.paymentMode;
@@ -44,6 +46,7 @@ function Cash({ price }) {
               marginTop: "20px",
               marginLeft: "33px",
             }}
+            onClick={()=>{navigate("/confirmation")}}
           >
             CONFIRM ORDER
           </button>
