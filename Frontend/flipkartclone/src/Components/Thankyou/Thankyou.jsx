@@ -12,6 +12,7 @@ import {
   useSteps,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const steps = [
   { title: "Order placed" },
@@ -21,7 +22,44 @@ const steps = [
 ];
 
 function Thankyou() {
-    const navigate = useNavigate()
+  useEffect(() => {
+    fetch("http://localhost:7000/addtocart", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+        fetch("http://localhost:7000/addtocart", {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(res),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("Something went wrong");
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Something went wrong");
+      });
+  }, []);
+  const navigate = useNavigate();
   const { activeStep } = useSteps({
     index: 1,
     count: steps.length,
@@ -96,7 +134,9 @@ function Thankyou() {
           <button
             className="pay_btn"
             style={{ backgroundColor: "#2874f0", padding: "15px" }}
-            onClick={()=>{navigate("/")}}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             BACK TO HOME
           </button>

@@ -32,6 +32,7 @@ function Cart() {
     getSavedItem(setSavedData);
   }, []);
 
+
   return (
     <div
       style={{

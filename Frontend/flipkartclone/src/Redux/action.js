@@ -1,4 +1,4 @@
-export const getCartItem = (setData,dispatch) => {
+export const getCartItem = (setData) => {
   fetch("http://localhost:7000/addtocart", {
     method: "GET",
     headers: {
@@ -18,7 +18,7 @@ export const getCartItem = (setData,dispatch) => {
     });
 };
 
-export const removeFromCart = (id, data, setData, toast,dispatch) => {
+export const removeFromCart = (id, data, setData, toast, dispatch) => {
   fetch(`http://localhost:7000/addtocart/${id}`, {
     method: "DELETE",
     headers: {
@@ -36,7 +36,7 @@ export const removeFromCart = (id, data, setData, toast,dispatch) => {
         duration: 3000,
         isClosable: true,
       });
-      getCartItem(setData,dispatch);
+      getCartItem(setData, dispatch);
     })
     .catch((err) => {
       console.log(err);
@@ -44,7 +44,14 @@ export const removeFromCart = (id, data, setData, toast,dispatch) => {
     });
 };
 
-export const movetosave = (id, setData, setSavedData, toast, name,dispatch) => {
+export const movetosave = (
+  id,
+  setData,
+  setSavedData,
+  toast,
+  name,
+  dispatch
+) => {
   fetch(`http://localhost:7000/saveditem/${id}`, {
     method: "POST",
     headers: {
@@ -62,7 +69,7 @@ export const movetosave = (id, setData, setSavedData, toast, name,dispatch) => {
         duration: 2000,
         isClosable: true,
       });
-      getCartItem(setData,dispatch);
+      getCartItem(setData, dispatch);
       getSavedItem(setSavedData);
     })
     .catch((err) => {
@@ -92,7 +99,7 @@ export const cartQuantity = (
       return res.json();
     })
     .then((res) => {
-      getCartItem(setData,dispatch);
+      getCartItem(setData, dispatch);
     })
     .catch((err) => {
       console.log(err);
@@ -120,7 +127,14 @@ export const getSavedItem = (setSavedData) => {
     });
 };
 
-export const movetocart = (id, setData, setSavedData, toast, name,dispatch) => {
+export const movetocart = (
+  id,
+  setData,
+  setSavedData,
+  toast,
+  name,
+  dispatch
+) => {
   fetch(`http://localhost:7000/saveditem/${id}`, {
     method: "DELETE",
     headers: {
@@ -138,7 +152,7 @@ export const movetocart = (id, setData, setSavedData, toast, name,dispatch) => {
         duration: 2000,
         isClosable: true,
       });
-      getCartItem(setData,dispatch);
+      getCartItem(setData, dispatch);
       getSavedItem(setSavedData);
     })
     .catch((err) => {
@@ -202,7 +216,7 @@ export const savedQuantity = (
     });
 };
 
-export const calculation = (data,setPrice,dispatch) => {
+export const calculation = (data, setPrice, dispatch) => {
   let originalP = data?.reduce((acc, item) => {
     return (
       Number(acc.original_price * acc.quantity) +
@@ -234,4 +248,29 @@ export const calculation = (data,setPrice,dispatch) => {
       currentPrice: currentP,
     },
   });
+};
+
+export const orderItem = (setData, search) => {
+  var url = "http://localhost:7000/orderitem";
+  if (search) {
+    url = `http://localhost:7000/orderitem?search=${search}`;
+  }
+  fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      setData(res);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("No Order Found!");
+    });
 };

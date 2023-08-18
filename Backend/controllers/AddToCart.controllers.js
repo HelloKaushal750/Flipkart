@@ -1,6 +1,7 @@
 const express = require("express");
 const CartController = express.Router();
 const { CartModel } = require("../models/AddToCart.model");
+const { OrderModel } = require("../models/Order.model");
 
 CartController.post("/", async (req, res) => {
   try {
@@ -25,6 +26,27 @@ CartController.get("/", async (req, res) => {
     res.status(200).json(cartItem);
   } catch (error) {
     res.status(404).res({ message: error });
+  }
+});
+
+CartController.delete("/", async (req, res) => {
+  try {
+    const orderItem  = req.body;
+    const {userId} = req.body;
+    orderItem.forEach(async (item) => {
+      const order = new OrderModel({ ...item, userId });
+      await order.save()
+    });
+    const deletedItem = await CartModel.deleteMany({
+      userId: req.body.userId,
+    });
+    if (deletedItem) {
+      res.status(200).json({ message: "Order Added Successfully and Cart Deleted Successfully" });
+    } else {
+      res.status(200).json({ message: "No Item found!" });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error });
   }
 });
 

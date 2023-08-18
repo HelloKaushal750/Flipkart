@@ -5,6 +5,7 @@ import ProductDetail from "../Components/ProductDetail/ProductDetail";
 import Cart from "../Components/Cart/Cart";
 import Booked from "../Components/Booked/Booked";
 import Thankyou from "../Components/Thankyou/Thankyou";
+import Order from "../Components/Order/Order"
 
 function AllRoutes(){
     return <Routes>
@@ -15,6 +16,7 @@ function AllRoutes(){
         <Route path="/cart" element={<Cart />} />
         <Route path="/bookingpage" element={<Booked />} />
         <Route path="/confirmation" element={<Thankyou />} />
+        <Route path="/order" element={<Order />} />
     </Routes>
 }
 

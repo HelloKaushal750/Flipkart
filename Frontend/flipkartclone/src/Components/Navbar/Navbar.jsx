@@ -151,7 +151,7 @@ function Navbar() {
                 <i className="fa-solid fa-plus"></i>
                 <p>Flipkart Plus Zone</p>
               </div>
-              <div>
+              <div onClick={()=>{navigate('/order')}}>
                 <i className="fa-solid fa-folder-plus"></i>
                 <p>Orders</p>
               </div>

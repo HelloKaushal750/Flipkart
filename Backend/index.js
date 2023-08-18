@@ -7,7 +7,7 @@ const { ProductController } = require("./controllers/Products.controllers");
 const { authenticate } = require("./middleware/authenticate");
 const { CartController } = require("./controllers/AddToCart.controllers");
 const { SavedItemController } = require("./controllers/SavedItem.controller");
-
+const { OrderController } = require("./controllers/Order.controllers");
 
 const app = express();
 
@@ -21,10 +21,11 @@ app.use("/products", ProductController);
 
 app.use(authenticate);
 
-app.use("/addtocart", CartController)
+app.use("/addtocart", CartController);
 
-app.use("/saveditem",SavedItemController)
+app.use("/saveditem", SavedItemController);
 
+app.use("/orderitem", OrderController);
 
 const port = process.env.PORT;
 
