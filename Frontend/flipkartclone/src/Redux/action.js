@@ -1,3 +1,5 @@
+
+
 export const getCartItem = (setData) => {
   fetch("http://localhost:7000/addtocart", {
     method: "GET",
@@ -271,6 +273,6 @@ export const orderItem = (setData, search) => {
     })
     .catch((err) => {
       console.log(err);
-      alert("No Order Found!");
+      alert("Something went wrong");
     });
 };

@@ -6,8 +6,10 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Payment from "./Payment";
+import { useToast } from "@chakra-ui/react";
 
 function Booked() {
+  const toast = useToast();
   const [boolean, setBoolean] = useState(false);
   const [boolean2, setBoolean2] = useState(false);
 
@@ -65,7 +67,12 @@ function Booked() {
 
   const handlephone = () => {
     if (phoneNo.length < 10) {
-      alert("Mobile Number is Invalid!");
+      toast({
+        title: "Mobile Number is Invalid!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     } else {
       setPhone(phoneNo);
       setBoolean(true);
@@ -79,9 +86,19 @@ function Booked() {
 
   const handlepayment = () => {
     if (!phone) {
-      alert("Please Enter Mobile Number");
+      toast({
+        title: "Please Enter Mobile Number",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     } else if (!address) {
-      alert("Please Enter Delivery Address");
+      toast({
+        title: "Please Enter Delivery Address",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     } else {
       dispatch({ type: "PAYMENT", payload: true });
     }

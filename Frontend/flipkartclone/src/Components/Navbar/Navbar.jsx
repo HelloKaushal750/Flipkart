@@ -11,8 +11,10 @@ import Signup from "../Signup/Signup";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from '@chakra-ui/react'
 
 function Navbar() {
+  const toast = useToast()
   const [inputSearch, setInputSearch] = useState("");
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -25,7 +27,12 @@ function Navbar() {
   }
   const gotToCart = ()=>{
     if(!localStorage.getItem('username')){
-      alert("Please Login")
+      toast({
+        title: 'Please Login',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
     }else{
       navigate("/cart")
     }

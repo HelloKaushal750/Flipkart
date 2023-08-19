@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Upi from "./UPI";
 import Credit from "./Credit";
 import Cash from "./Cash";
+import { useToast } from '@chakra-ui/react' 
 
 function Payment({ price }) {
+  const toast = useToast()
   const dispatch = useDispatch();
   const paymentMode = useSelector((state) => {
     return state.paymentMode;
@@ -13,9 +15,9 @@ function Payment({ price }) {
 
   return (
     <div className="payment_page">
-      <Upi price={price} />
-      <Credit price={price} />
-      <Cash price={price} />
+      <Upi price={price} toast={toast} />
+      <Credit price={price} toast={toast} />
+      <Cash price={price} toast={toast} />
       <div
         style={{
           display: "flex",

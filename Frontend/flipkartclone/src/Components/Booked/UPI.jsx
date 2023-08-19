@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 
-function Upi({ price }) {
+
+function Upi({ price, toast}) {
   const navigate = useNavigate();
   const [seconds, setSeconds] = useState(60);
   const [redirect, setRedirect] = useState(false);
@@ -17,9 +18,19 @@ function Upi({ price }) {
 
   const handleupi = () => {
     if (upi.length === 0) {
-      alert("Plaese Enter UPI ID");
+      toast({
+        title: 'Please Enter UPI ID',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
     } else if (upi.length < 12) {
-      alert("Invalid UPI ID");
+      toast({
+        title: 'Invalid UPI ID',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
       setUpi("");
     } else {
       setUpi("");
