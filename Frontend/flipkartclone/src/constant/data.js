@@ -122,6 +122,14 @@ export const delivery = [
   "Delivery by Fri Aug 18",
 ];
 
+export const delivered = [
+  "Delivered on Aug 11",
+  "Delivered on Aug 10",
+  "Delivered on Aug 13",
+  "Delivered on Aug 14",
+  "Delivered on Aug 18",
+];
+
 export const delivery2 = [
   "Delivery by 8 PM, Tomorrow",
   "Delivery by 6 PM, Today",

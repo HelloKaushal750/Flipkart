@@ -1,0 +1,7 @@
+.orderitem_page{
+    display: grid;
+    grid-template-columns: 10% 40% 18% 32%;
+    background-color: white;
+    padding: 15px;
+    border: 1px solid rgb(215, 214, 214);
+}

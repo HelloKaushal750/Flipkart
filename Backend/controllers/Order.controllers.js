@@ -22,10 +22,12 @@ OrderController.get("/", async (req, res) => {
         const data = await OrderModel.find(filter)
         res.status(200).json(data);
       } catch (error) {
-        res.status(404).json({ message: "No Order Found!" });
+        console.log(error);
+        res.status(404).json({ message: error });
       }
     }
   } catch (error) {
+    console.log(error);
     res.status(404).res({ message: error });
   }
 });

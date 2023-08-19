@@ -1,0 +1,39 @@
+.order_page {
+  display: grid;
+  grid-template-columns: 18% 82%;
+  gap: 15px;
+  padding-right: 15px;
+  margin-top: 10px;
+}
+.left_orderpage{
+    background-color: white;
+    padding: 5px 15px;
+    height: 440px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.orderstatus{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.orderstatus>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+.right_orderpage input{
+    width: 78%;
+    font-size: 14px;
+    padding: 9px;
+    border: 1px solid rgb(215, 214, 214);
+    border-radius: 5px 0 0 5px;
+}
+.right_orderpage>div>button{
+    background-color: #2874f0;
+    color: white;
+    padding: 11px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 0 5px 5px 0;
+}
