@@ -8,7 +8,7 @@ This project is a clone of the popular e-commerce platform Flipkart. It was crea
 
 ## Deployment
 
-Website is hosted on **Vercel**
+The website is hosted on **Vercel**
 
 ```bash
   https://flipkart-kappa.vercel.app/
@@ -64,10 +64,15 @@ npm start
 Here are some screenshots of the Flipkart clone website:
 
 ![Home Page](Images/home.png)
+
 ![Product](Images/product.png)
+
 ![Product Details](Images/description.png)
+
 ![Cart](Images/cart.png)
+
 ![Payment](Images/payment.png)
+
 ![My Orders](Images/order.png)
 
 
