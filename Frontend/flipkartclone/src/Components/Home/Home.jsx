@@ -23,7 +23,7 @@ function Home() {
       >
         <HomeSlider />
         <Slider
-          search={"topoffer"}
+          search={"laptop"}
           banner={true}
           title={"Top Offers"}
           url={
